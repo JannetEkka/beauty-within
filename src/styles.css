@@ -1,0 +1,103 @@
+:root {
+  --bg: #faf6f2;
+  --card: #ffffff;
+  --ink: #2a211d;
+  --muted: #7a6c64;
+  --line: #eadfd6;
+  --accent: #a24f62;
+  --accent-ink: #ffffff;
+  --keep: #2f7d4f;
+  --swap: #b26a12;
+  --skip: #a33a3a;
+  --keep-bg: #e9f5ee;
+  --swap-bg: #fbf1e3;
+  --skip-bg: #fbeaea;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1b1715;
+    --card: #26201d;
+    --ink: #f3ebe5;
+    --muted: #b3a49a;
+    --line: #3a302b;
+    --accent: #e8a0b0;
+    --accent-ink: #1b1715;
+    --keep: #7fd1a0;
+    --swap: #f0b765;
+    --skip: #f08f8f;
+    --keep-bg: #1f2e25;
+    --swap-bg: #33281a;
+    --skip-bg: #341f1f;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+.page { max-width: 980px; margin: 0 auto; padding: 24px 16px 48px; }
+h1 { font-size: 2.1rem; margin: 0 0 4px; letter-spacing: -0.02em; }
+h2 { font-size: 1.1rem; margin: 0 0 10px; }
+.store { text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.75rem; color: var(--accent); font-weight: 600; }
+.lede { margin: 0; color: var(--muted); max-width: 46ch; }
+.top { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: flex-end; margin-bottom: 20px; }
+.steps { display: flex; gap: 6px; flex-wrap: wrap; }
+.steps button { border-radius: 999px; }
+.steps button span { display: inline-grid; place-items: center; width: 1.4em; height: 1.4em; border-radius: 50%; background: var(--line); font-size: 0.8em; margin-right: 4px; }
+.steps button.on { border-color: var(--accent); color: var(--accent); }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px; margin-bottom: 14px; }
+button, .file { font: inherit; border: 1px solid var(--line); background: var(--card); color: var(--ink); padding: 8px 14px; border-radius: 10px; cursor: pointer; }
+button:disabled { opacity: 0.5; cursor: default; }
+.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; }
+.file { display: inline-block; position: relative; overflow: hidden; }
+.file input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.file.disabled { opacity: 0.5; pointer-events: none; }
+button.link { background: none; border: none; color: var(--accent); padding: 4px 6px; text-decoration: underline; }
+input, select { font: inherit; padding: 8px 10px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); }
+input { flex: 1; min-width: 0; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 10px; }
+.muted { color: var(--muted); }
+.small { font-size: 0.85rem; }
+.alert { background: var(--skip-bg); color: var(--skip); padding: 10px 14px; border-radius: 10px; margin-bottom: 12px; }
+.busy { background: var(--swap-bg); color: var(--swap); padding: 10px 14px; border-radius: 10px; margin-bottom: 12px; }
+h3 { font-size: 0.95rem; margin: 16px 0 8px; }
+.top { margin-bottom: 20px; }
+.top h1 { font-size: 2.3rem; }
+.lede { max-width: 60ch; }
+.cast { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin-bottom: 18px; }
+.castcard { padding: 0; border-radius: 14px; overflow: hidden; border: 2px solid transparent; }
+.castcard:hover, .castcard:focus-visible { border-color: var(--accent); }
+.castcard img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: top; }
+.framer { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; margin-top: 12px; }
+@media (max-width: 720px) { .framer { grid-template-columns: 1fr; } }
+.frame-wrap { position: relative; }
+.frame-wrap img { display: block; width: 100%; border-radius: 10px; }
+.frame-box { position: absolute; border: 3px solid var(--accent); border-radius: 8px; box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.35); pointer-events: none; }
+.frame-wrap { overflow: hidden; border-radius: 10px; }
+.sliders { display: grid; gap: 12px; align-content: start; }
+.sliders label { display: grid; gap: 4px; font-size: 0.9rem; }
+.portrait { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.3fr); gap: 16px; align-items: start; }
+@media (max-width: 820px) { .portrait { grid-template-columns: 1fr; } }
+.mirror { position: sticky; top: 12px; }
+@media (max-width: 820px) { .mirror { position: static; } }
+.ph { aspect-ratio: 3 / 4; border-radius: 10px; background: var(--line); display: grid; place-items: center; color: var(--muted); }
+.tones { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 8px; }
+.tones span { display: inline-flex; align-items: center; gap: 6px; }
+.options { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+.option { display: flex; gap: 10px; align-items: center; text-align: left; }
+.option:hover { border-color: var(--accent); }
+.thumb { width: 44px; height: 44px; object-fit: cover; border-radius: 8px; }
+.palette, .strengths, .habits { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.palette li { display: flex; gap: 10px; align-items: center; }
+.strengths li { padding: 8px 12px; background: var(--keep-bg); border-radius: 10px; color: var(--ink); }
+.care { border-top: 1px solid var(--line); padding: 10px 0; }
+.care summary { cursor: pointer; }
+.care table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin: 10px 0; }
+.care th, .care td { text-align: left; vertical-align: top; padding: 6px 8px 6px 0; border-bottom: 1px solid var(--line); }
+@media (max-width: 560px) { .care table, .care tbody, .care tr, .care td { display: block; } .care thead { display: none; } .care td { border: none; padding: 2px 0; } .care tr { border-bottom: 1px solid var(--line); padding: 6px 0; } }
+.habits li { font-size: 0.9rem; padding-left: 12px; border-left: 2px solid var(--keep); }
+.pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
+.pair figure { margin: 0; }
+.pair img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: top; border-radius: 10px; }
+.pair figcaption { font-size: 0.85rem; color: var(--muted); text-align: center; }
+a { color: var(--accent); }
+footer { margin-top: 28px; color: var(--muted); font-size: 0.8rem; }
