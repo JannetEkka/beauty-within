@@ -25,7 +25,8 @@ export interface Env {
   CACHE: Store;
 }
 
-const DEFAULT_BASE = 'https://yce-api-01.makeupar.com';
+// Global console accounts (yce.perfectcorp.com); India-region accounts set YOUCAM_API_BASE to https://yce-api-01.makeupar.com.
+const DEFAULT_BASE = 'https://yce-api-01.perfectcorp.com';
 const DAY = 86_400;
 const LIVE_TTL = 2 * DAY; // visitors' photos and results are dropped after two days
 const PORTRAIT_COST = 14 + 20 + 10; // skin analysis + colour tones + face shape

@@ -16,7 +16,7 @@ const taskPath = (kind: TaskKind) => `/s2s/${TASK_VERSION[kind] ?? 'v2.0'}/task/
 
 export interface YouCamOptions {
   apiKey: string;
-  /** e.g. https://yce-api-01.makeupar.com. Set YOUCAM_API_BASE for the India-region host if it differs. */
+  /** https://yce-api-01.perfectcorp.com (global console) or https://yce-api-01.makeupar.com (India-region console). */
   baseUrl: string;
   fetch?: typeof fetch;
   sleep?: (ms: number) => Promise<void>;
