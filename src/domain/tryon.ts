@@ -1,5 +1,5 @@
 // Request bodies for the YouCam try-ons. One rule runs through all of them: her face and skin are never retouched.
-import type { LipTint } from './lip';
+import { TINT_INTENSITY, type LipTint } from './lip';
 
 export type Src = { fileId?: string; url?: string };
 const src = (s: Src) => (s.fileId ? { src_file_id: s.fileId } : { src_file_url: s.url });
@@ -7,7 +7,7 @@ const src = (s: Src) => (s.fileId ? { src_file_id: s.fileId } : { src_file_url: 
 /** The makeup engine smooths skin at 50 unless told otherwise. We always set it to 0. */
 export const NO_SMOOTHING = { category: 'skin_smooth', skinSmoothStrength: 0, skinSmoothColorIntensity: 0 } as const;
 
-/** POST /s2s/v2.0/task/makeup-vto: 1 unit. A satin lip tint, nothing else. */
+/** POST /s2s/v2.0/task/makeup-vto: 1 unit. A satin lip tint, nothing else; the input colour is pre-lifted so her lip depth holds. */
 export function lipTintRequest(s: Src, tint: LipTint) {
   return {
     ...src(s),
@@ -18,7 +18,7 @@ export function lipTintRequest(s: Src, tint: LipTint) {
         category: 'lip_color',
         shape: { name: 'original' },
         style: { type: 'full' },
-        palettes: [{ color: tint.hex.toUpperCase(), texture: 'satin', colorIntensity: 45 }],
+        palettes: [{ color: tint.renderHex.toUpperCase(), texture: 'satin', colorIntensity: TINT_INTENSITY }],
       },
     ],
   };
