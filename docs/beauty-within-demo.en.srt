@@ -1,0 +1,160 @@
+1
+00:00:00,252 --> 00:00:02,639
+Every woman is already beautiful.
+
+2
+00:00:03,252 --> 00:00:06,937
+A good hairstyle and the right lip colour go a long way,
+
+3
+00:00:06,977 --> 00:00:09,564
+but confidence is what makes you shine.
+
+4
+00:00:10,177 --> 00:00:11,687
+Beauty Within is a web app
+
+5
+00:00:11,727 --> 00:00:13,752
+built on the YouCam API.
+
+6
+00:00:14,377 --> 00:00:17,324
+Pick a sample portrait, or use your camera,
+
+7
+00:00:17,364 --> 00:00:19,324
+where YouCam's JS Camera Kit
+
+8
+00:00:19,364 --> 00:00:21,377
+guides your face into place.
+
+9
+00:00:22,063 --> 00:00:25,660
+The Facial Color Tones Analyzer reads her real skin,
+
+10
+00:00:25,700 --> 00:00:26,960
+lip and eye colour,
+
+11
+00:00:27,000 --> 00:00:30,025
+and the Face Analyzer reads her face shape.
+
+12
+00:00:30,625 --> 00:00:33,788
+Everything after this starts from her own colours.
+
+13
+00:00:34,572 --> 00:00:37,107
+Her clothes palette comes from her undertone
+
+14
+00:00:37,147 --> 00:00:40,072
+and the contrast between her skin and hair.
+
+15
+00:00:40,697 --> 00:00:43,419
+She picks an outfit from YouCam's catalogue,
+
+16
+00:00:43,459 --> 00:00:46,234
+and AI Clothes puts it on her photo.
+
+17
+00:00:46,978 --> 00:00:49,753
+Hairstyles are chosen for her face shape.
+
+18
+00:00:50,353 --> 00:00:53,650
+AI Hairstyle layers the cut onto the same look,
+
+19
+00:00:53,690 --> 00:00:55,803
+and keeps her own hair colour.
+
+20
+00:00:56,584 --> 00:01:00,669
+Then the only makeup: a lip tint at her exact lip depth,
+
+21
+00:01:00,709 --> 00:01:03,246
+with a touch of rose, pink or red.
+
+22
+00:01:03,871 --> 00:01:07,194
+Makeup Virtual Try-On runs with skin smoothing off,
+
+23
+00:01:07,234 --> 00:01:09,359
+so her skin stays as it is.
+
+24
+00:01:09,971 --> 00:01:12,081
+The choices stack into one look,
+
+25
+00:01:12,121 --> 00:01:14,559
+and any of them can come off again.
+
+26
+00:01:15,289 --> 00:01:19,186
+In Care, she tells us about herself: vegetarian,
+
+27
+00:01:19,226 --> 00:01:22,626
+fifty-eight kilos, and worried about hair fall.
+
+28
+00:01:23,239 --> 00:01:25,461
+AI Skin Analysis leads with
+
+29
+00:01:25,501 --> 00:01:27,126
+what's already working.
+
+30
+00:01:27,739 --> 00:01:30,624
+Care from within lists the nutrients involved,
+
+31
+00:01:30,664 --> 00:01:34,274
+the published daily amounts, vegetarian foods only,
+
+32
+00:01:34,314 --> 00:01:37,401
+and simple habits, each with its source.
+
+33
+00:01:38,098 --> 00:01:40,948
+The same rules work for every skin tone.
+
+34
+00:01:41,560 --> 00:01:44,958
+Here the tint follows a deeper lip at its own depth,
+
+35
+00:01:44,998 --> 00:01:47,248
+and the outfit follows her colours.
+
+36
+00:01:48,003 --> 00:01:49,438
+Results are cached,
+
+37
+00:01:49,478 --> 00:01:52,203
+and the API key stays on the server.
+
+38
+00:01:52,815 --> 00:01:56,300
+For shoppers and stores, that means fewer wrong buys,
+
+39
+00:01:56,340 --> 00:01:59,215
+and more women seeing themselves as they are.
+
+40
+00:01:59,828 --> 00:02:03,015
+Beauty Within, built with the YouCam API.
+

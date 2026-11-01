@@ -4,7 +4,7 @@ Every woman is already beautiful. A good hairstyle and the right lip colour go a
 
 Built for the YouCam API Skin AI & eCommerce VTO hackathon.
 
-**Live:** https://beauty-within.pages.dev · **Demo video:** [docs/beauty-within-demo.mp4](docs/beauty-within-demo.mp4) · **Screenshots:** [docs/screenshots](docs/screenshots)
+**Live:** https://beauty-within.pages.dev · **Demo video:** [docs/beauty-within-demo.mp4](docs/beauty-within-demo.mp4) (captions burned in; [English .srt](docs/beauty-within-demo.en.srt)) · **Screenshots:** [docs/screenshots](docs/screenshots)
 
 ## What it does
 
