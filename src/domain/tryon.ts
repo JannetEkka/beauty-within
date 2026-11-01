@@ -39,11 +39,7 @@ export function hairStyleRequest(s: Src, templateId: string) {
   return { ...src(s), template_id: templateId, hair_color: 'src' };
 }
 
-/** POST /s2s/v2.0/task/cloth-v4: 2 units. */
-export function clothesRequest(s: Src, garment: { refUrl?: string; refFileId?: string; category: 'upper_body' | 'full_body' | 'outer' | 'auto' }) {
-  return {
-    ...src(s),
-    ...(garment.refFileId ? { ref_file_id: garment.refFileId } : { ref_file_url: garment.refUrl }),
-    garment_category: garment.category,
-  };
+/** POST /s2s/v2.0/task/cloth-v4: 2 units. The outfit's catalogue photo is the reference; portraits are chest-up, so the top is transferred. */
+export function clothesRequest(s: Src, outfit: { thumb: string }) {
+  return { ...src(s), ref_file_url: outfit.thumb, garment_category: 'upper_body' };
 }

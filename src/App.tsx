@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
-import { getCast, getHairTemplates, getStatus, makePortrait, preparePhoto, tryOn, type CastEntry, type Frame, type Status, type TryOn } from './api';
+import { getCast, getStatus, makePortrait, preparePhoto, tryOn, type CastEntry, type Frame, type Status, type TryOn } from './api';
 import { skinStory } from './domain/care';
-import { HAIR_BY_SHAPE, hairColours, pickStyles, type HairTemplate } from './domain/hair';
+import hairTemplates from '../fixtures/hair-templates.json';
+import { HAIR_BY_SHAPE, HAIR_SHADES, hairColours, pickStyles, shadeFromName, withHair, type HairShade } from './domain/hair';
+import { pickOutfits } from './domain/outfits';
 import { lipTints } from './domain/lip';
 import { paletteFor, readPalette } from './domain/palette';
 import type { Portrait } from './domain/types';
@@ -9,6 +11,8 @@ import type { Portrait } from './domain/types';
 interface Current {
   portrait: Portrait;
   photo: string;
+  /** Hair colour as she confirms it; YouCam's hair read is a starting point. */
+  hair: HairShade;
 }
 
 export default function App() {
@@ -49,7 +53,7 @@ function Start({ cast, status, onPick, onError }: { cast: CastEntry[]; status?: 
       <h2>Choose a portrait</h2>
       <div className="cast">
         {cast.map((c) => (
-          <button key={c.id} className="castcard" onClick={() => onPick({ portrait: c.portrait, photo: c.photo })} aria-label="Open this sample portrait">
+          <button key={c.id} className="castcard" onClick={() => onPick({ portrait: c.portrait, photo: c.photo, hair: c.hair })} aria-label="Open this sample portrait">
             <img src={c.photo} alt="" loading="lazy" />
           </button>
         ))}
@@ -80,7 +84,7 @@ function Framer({ file, onCancel, onDone, onError }: { file: File; onCancel: () 
     try {
       const { photo, face } = await preparePhoto(file, frame);
       const r = await makePortrait(photo, face);
-      onDone({ portrait: r.portrait, photo: r.photo });
+      onDone({ portrait: r.portrait, photo: r.photo, hair: shadeFromName(r.portrait.tone.hairName) ?? 'Black' });
     } catch (e) {
       onError(String((e as Error).message));
     } finally {
@@ -112,19 +116,20 @@ function Swatch({ hex, size = 28, label }: { hex?: string; size?: number; label?
 }
 
 function PortraitView({ current, onBack }: { current: Current; onBack: () => void }) {
-  const { portrait: p, photo } = current;
+  const { photo } = current;
+  const [hair, setHair] = useState<HairShade>(current.hair);
   const [shot, setShot] = useState<{ label: string; image?: string; busy?: boolean; error?: string }>();
-  const [templates, setTemplates] = useState<HairTemplate[]>([]);
-  useEffect(() => {
-    getHairTemplates().then(setTemplates).catch(() => setTemplates([]));
-  }, []);
+  // Her colours with the hair colour she confirmed.
+  const p: Portrait = withHair(current.portrait, hair);
+  const youcamHair = current.portrait.tone.hairName;
 
   const pal = readPalette(p);
   const story = skinStory(p);
   const tints = lipTints(p.tone.lip);
-  const styles = pickStyles(p.faceShape, templates);
-  const shades = hairColours(p.tone.hair);
+  const styles = pickStyles(p.faceShape, hairTemplates);
+  const shades = hairColours(HAIR_SHADES[hair]);
   const colours = paletteFor(p);
+  const outfits = pickOutfits(colours);
 
   async function run(label: string, t: TryOn) {
     setShot({ label, busy: true });
@@ -158,10 +163,14 @@ function PortraitView({ current, onBack }: { current: Current; onBack: () => voi
             <span><Swatch hex={p.tone.skin} label="Skin" /> Skin</span>
             <span><Swatch hex={p.tone.lip} label="Lips" /> Lips</span>
             <span><Swatch hex={p.tone.eye} label="Eyes" /> Eyes{p.tone.eyeName ? `, ${p.tone.eyeName.toLowerCase()}` : ''}</span>
-            <span><Swatch hex={p.tone.hair} label="Hair" /> Hair{p.tone.hairName ? `, ${p.tone.hairName.toLowerCase()}` : ''}</span>
+            <label className="hairpick"><Swatch hex={p.tone.hair} label="Hair" /> Hair{' '}
+              <select value={hair} onChange={(e) => setHair(e.target.value as HairShade)} aria-label="Your hair colour">
+                {(Object.keys(HAIR_SHADES) as HairShade[]).map((h) => <option key={h} value={h}>{h.toLowerCase()}</option>)}
+              </select>
+            </label>
           </div>
+          {youcamHair !== hair && <p className="muted small">YouCam read your hair as {youcamHair ? youcamHair.toLowerCase() : 'unclear'}; change it above if that's not right.</p>}
           <p className="small">Your skin reads <b>{pal.undertone}</b>, with <b>{pal.contrast}</b> contrast against your hair. Everything below starts from these colours.</p>
-          {p.source === 'sample' && <p className="muted small">Sample reading. It's replaced with YouCam's own result once recorded.</p>}
         </div>
 
         <div className="card">
@@ -185,12 +194,11 @@ function PortraitView({ current, onBack }: { current: Current; onBack: () => voi
                 {t.thumb ? <img src={t.thumb} alt="" className="thumb" /> : null} <b>{t.title}</b>
               </button>
             ))}
-            {!styles.length && <p className="muted small">Hairstyles load from YouCam once the API key is in.</p>}
           </div>
           <h3>Colour, kept close to yours</h3>
           <div className="options">
             {shades.map((c, i) => (
-              <button key={c.name} className="option" onClick={() => run(c.name, { kind: 'hairColour', option: i })}>
+              <button key={c.name} className="option" onClick={() => run(c.name, { kind: 'hairColour', option: i, hair })}>
                 <Swatch hex={c.hex} size={36} /> <span><b>{c.name}</b><br /><span className="muted small">{c.note}</span></span>
               </button>
             ))}
@@ -204,6 +212,15 @@ function PortraitView({ current, onBack }: { current: Current; onBack: () => voi
               <li key={c.name}><Swatch hex={c.hex} size={40} /> <span><b>{c.name}</b><br /><span className="muted small">{c.why}</span></span></li>
             ))}
           </ul>
+          <h3>Try on, from the catalogue</h3>
+          <div className="outfits">
+            {outfits.map(({ outfit, colour }) => (
+              <button key={outfit.id} className="outfit" onClick={() => run(outfit.title, { kind: 'clothes', outfitId: outfit.id })}>
+                <img src={outfit.thumb} alt="" loading="lazy" />
+                <span><b>{outfit.title}</b><br /><span className="muted small">In {colour.name.toLowerCase()}, one of your colours</span></span>
+              </button>
+            ))}
+          </div>
         </div>
 
         <div className="card">

@@ -119,20 +119,22 @@ export interface SkinStory {
   care: { concern: ScoredConcern; label: string; score: number; nutrients: Nutrient[]; habits: string[] }[];
 }
 
-/** The three best-scoring areas, then up to three that scored lowest (below 60), never framed as flaws. */
+/**
+ * The three best-scoring areas first. Then her lowest areas, even when they score well, since that is where
+ * care pays off most: up to three below 85, and always at least the lowest two.
+ */
 export function skinStory(p: Portrait): SkinStory {
   const entries = (Object.entries(p.scores) as [ScoredConcern, number][]).sort((a, b) => b[1] - a[1]);
   const strengths = entries.slice(0, 3).map(([concern, score]) => ({ concern, label: CONCERN_LABEL[concern], score }));
-  const care = entries
-    .filter(([c, s]) => s < 60 && !strengths.some((x) => x.concern === c))
-    .slice(-3)
-    .reverse()
-    .map(([concern, score]) => ({
-      concern,
-      label: CONCERN_LABEL[concern],
-      score,
-      nutrients: AREAS[concern].nutrients.map((n) => NUTRIENTS[n]),
-      habits: AREAS[concern].habits,
-    }));
+  const rest = entries.filter(([c]) => !strengths.some((x) => x.concern === c)).reverse(); // lowest first
+  const low = rest.filter(([, s]) => s < 85).slice(0, 3);
+  const chosen = low.length >= 2 ? low : rest.slice(0, 2);
+  const care = chosen.map(([concern, score]) => ({
+    concern,
+    label: CONCERN_LABEL[concern],
+    score,
+    nutrients: AREAS[concern].nutrients.map((n) => NUTRIENTS[n]),
+    habits: AREAS[concern].habits,
+  }));
   return { strengths, care };
 }

@@ -1,12 +1,13 @@
 // The app's API, independent of the host. Cloudflare Pages Functions call handle().
 // Every YouCam result is cached by content hash, and live calls stop while the account is below UNIT_FLOOR.
 import { castById } from '../domain/cast';
-import { hairColours } from '../domain/hair';
+import { hairColours, HAIR_SHADES, type HairShade } from '../domain/hair';
+import { outfitById } from '../domain/outfits';
+import hairTemplates from '../../fixtures/hair-templates.json';
 import { lipTints, type TintName } from '../domain/lip';
 import { buildPortrait } from '../domain/scan';
 import { clothesRequest, hairColourRequest, hairStyleRequest, lipTintRequest, type Src } from '../domain/tryon';
 import { CONCERNS, type Portrait } from '../domain/types';
-import { recordedPortrait } from './recorded';
 import { resultImageUrl, YouCam, YouCamError, type TaskKind } from './youcam';
 
 export interface Store {
@@ -33,9 +34,11 @@ const PORTRAIT_COST = 14 + 20 + 10; // skin analysis + colour tones + face shape
 
 export type TryOn =
   | { kind: 'lip'; tint: TintName }
-  | { kind: 'hairColour'; option: number }
+  | { kind: 'hairColour'; option: number; hair: HairShade }
   | { kind: 'hairStyle'; templateId: string }
-  | { kind: 'clothes'; garmentUrl: string; category: 'upper_body' | 'full_body' | 'outer' };
+  | { kind: 'clothes'; outfitId: string };
+
+const HAIR_TEMPLATE_IDS = new Set(hairTemplates.map((t) => t.id));
 
 const TRYON_TASK: Record<TryOn['kind'], { task: TaskKind; units: number }> = {
   lip: { task: 'makeup-vto', units: 1 },
@@ -95,9 +98,8 @@ export async function handle(req: Request, env: Env): Promise<Response> {
       return json({ live: left !== undefined && left > Number(env.UNIT_FLOOR ?? 150) + PORTRAIT_COST, unitsLeft: left !== undefined ? Math.floor(left) : undefined });
     }
     if (req.method === 'GET' && path === '/cast') {
-      return json([...castById.values()].map((c) => ({ id: c.id, photo: c.photo, portrait: recordedPortrait(c.id) ?? c.placeholder })));
+      return json([...castById.values()].map((c) => ({ id: c.id, photo: c.photo, hair: c.hair, portrait: c.portrait })));
     }
-    if (req.method === 'GET' && path === '/hair-templates') return await hairTemplates(env);
     if (req.method === 'POST' && path === '/portrait') return await portrait(req, env);
     if (req.method === 'POST' && path === '/tryon') return await tryOn(req, env);
 
@@ -112,17 +114,6 @@ export async function handle(req: Request, env: Env): Promise<Response> {
     const status = e instanceof YouCamError ? (e.status >= 400 && e.status < 600 ? e.status : 502) : 500;
     return json({ error: e instanceof Error ? e.message : 'unexpected error', code: e instanceof YouCamError ? e.code : undefined }, status);
   }
-}
-
-/** YouCam's hairstyle templates, cached for a week. Listing them costs no units. */
-async function hairTemplates(env: Env): Promise<Response> {
-  const cached = await env.CACHE.get('hair-templates', 'json');
-  if (cached) return json(cached);
-  const yc = client(env);
-  if (!yc) return json([]);
-  const list = await yc.hairTemplates();
-  await env.CACHE.put('hair-templates', JSON.stringify(list), { expirationTtl: 7 * DAY });
-  return json(list);
 }
 
 async function portrait(req: Request, env: Env): Promise<Response> {
@@ -149,7 +140,7 @@ async function portrait(req: Request, env: Env): Promise<Response> {
   const [skin, tone, shape] = await Promise.all([
     yc.run('skin-analysis', { src_file_id: faceId, dst_actions: [...CONCERNS], format: 'json' }),
     yc.run('skin-tone-analysis', { src_file_id: faceId, face_angle_strictness_level: 'medium' }),
-    yc.run('face-attr-analysis', { src_file_id: faceId, features: ['faceShape'], face_angle_strictness_level: 'medium' }),
+    yc.run('face-attr-analysis', { src_file_id: faceId, features: ['faceShape', 'hairColor', 'lipColor', 'eyeColor'], face_angle_strictness_level: 'medium' }),
   ]);
   const p = buildPortrait(id, 'live', skin, tone, shape);
   const photoKey = `photo-${id}`;
@@ -168,14 +159,20 @@ function bodyFor(t: TryOn, s: Src, p: Portrait) {
       return lipTintRequest(s, tint);
     }
     case 'hairColour': {
-      const option = hairColours(p.tone.hair)[t.option];
+      const shade = HAIR_SHADES[t.hair];
+      if (!shade) throw new YouCamError('unknown hair colour', 400);
+      const option = hairColours(shade)[t.option];
       if (!option) throw new YouCamError('unknown hair colour', 400);
       return hairColourRequest(s, option);
     }
     case 'hairStyle':
+      if (!HAIR_TEMPLATE_IDS.has(t.templateId)) throw new YouCamError('unknown hairstyle', 400);
       return hairStyleRequest(s, t.templateId);
-    case 'clothes':
-      return clothesRequest(s, { refUrl: t.garmentUrl, category: t.category });
+    case 'clothes': {
+      const outfit = outfitById.get(t.outfitId);
+      if (!outfit) throw new YouCamError('unknown outfit', 400);
+      return clothesRequest(s, outfit);
+    }
   }
 }
 
@@ -189,7 +186,7 @@ async function tryOn(req: Request, env: Env): Promise<Response> {
   const cast = castById.get(portraitId);
   const stored = cast ? undefined : ((await env.CACHE.get(`portrait:${portraitId}`, 'json')) as StoredPortrait | null);
   if (!cast && !stored) return json({ error: 'This portrait has expired. Start again.' }, 404);
-  const p = cast ? (recordedPortrait(cast.id) ?? cast.placeholder) : stored!.portrait;
+  const p = cast ? cast.portrait : stored!.portrait;
 
   const yc = client(env);
   if (!yc) return json({ error: 'Try-ons need the API key on this deployment.' }, 503);

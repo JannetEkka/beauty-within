@@ -1,5 +1,5 @@
 // Browser side of the API. The YouCam key never reaches the browser; everything goes through /api.
-import type { HairTemplate } from './domain/hair';
+import type { HairShade } from './domain/hair';
 import type { Portrait } from './domain/types';
 import type { TryOn } from './server/api';
 
@@ -14,6 +14,7 @@ export interface Status {
 export interface CastEntry {
   id: string;
   photo: string;
+  hair: HairShade;
   portrait: Portrait;
 }
 
@@ -26,7 +27,6 @@ async function call<T>(path: string, init?: RequestInit): Promise<T> {
 
 export const getStatus = () => call<Status>('/status');
 export const getCast = () => call<CastEntry[]>('/cast');
-export const getHairTemplates = () => call<HairTemplate[]>('/hair-templates');
 
 export function makePortrait(photo: Blob, face: Blob) {
   const form = new FormData();
