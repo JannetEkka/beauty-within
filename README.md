@@ -4,13 +4,15 @@ Every woman is already beautiful. A good hairstyle and the right lip colour go a
 
 Built for the YouCam API Skin AI & eCommerce VTO hackathon.
 
+**Live:** https://beauty-within.pages.dev · **Demo video:** [docs/beauty-within-demo.mp4](docs/beauty-within-demo.mp4) · **Screenshots:** [docs/screenshots](docs/screenshots)
+
 ## What it does
 
 - **Your colours:** the YouCam Facial Color Tones Analyzer measures skin, lips, eyes and hair. The undertone reading adjusts for skin depth, so deep skin isn't labelled "cool" just because it sits redder in colour space.
 - **Lip tint, the only makeup:** your own lip colour at exactly the same depth, with a touch of rose, pink or red. It is never darker and never lighter, for every skin tone. Skin smoothing is set to 0 on every makeup call (the engine's default is 50).
 - **Hair:** the Face Analyzer reads face shape, and hairstyle try-ons keep your own hair colour. Hair-colour options stay close to yours: shine, or a soft warm glaze.
-- **Clothes:** wardrobe colours chosen from your undertone, the contrast between your skin and hair, and echoes of your eye and lip colour, then tried on with Clothes Virtual Try-On.
-- **Skin, read kindly:** AI Skin Analysis shows what's already working first. For areas that could use care, it lists the nutrients involved, the published daily amounts for adult women, everyday foods and simple habits, with sources (NIH Office of Dietary Supplements, National Academies). This is general information, not a prescription.
+- **Clothes:** wardrobe colours chosen from your undertone, the contrast between your skin and hair, and echoes of your eye and lip colour. Outfits from YouCam's own clothes catalogue in those colours are tried on with AI Clothes. Menswear, a real fashion brand, national-team kits, costumes, swimwear and bottoms-only pieces are left out.
+- **Skin, read kindly:** AI Skin Analysis shows what's already working first. For her lowest areas, it lists the nutrients involved, the published daily amounts for adult women, everyday foods and simple habits, with sources (NIH Office of Dietary Supplements, National Academies). This is general information, not a prescription.
 
 ## YouCam APIs and units
 
@@ -28,7 +30,7 @@ A full portrait costs 44 units, plus 1–2 per try-on. Results are cached by con
 
 ## Sample portraits
 
-The five sample portraits are YouCam's own API sample photos (plugins-media.makeupar.com), chosen for a range of skin tones and features. They're linked, not copied into this repo.
+The five sample portraits are YouCam's own API sample photos (plugins-media.makeupar.com), chosen for a range of skin tones and features. They're linked, not copied into this repo. Their readings are YouCam's real replies, recorded on 2026-11-01 (`fixtures/recorded/`). YouCam's hair-colour read was wrong or empty on four of the five, so the app lets the user correct it.
 
 ## Code
 

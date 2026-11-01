@@ -1,0 +1,15 @@
+Every woman is already beautiful. A good hairstyle and the right lip colour go a long way, but confidence is what makes you shine. Beauty Within is a web app built on the YouCam API, and it starts from what you already have.
+
+Pick a portrait, or use your own photo. The YouCam Facial Color Tones Analyzer reads the real colour of her skin, lips and eyes, and the Face Analyzer reads her face shape. If the hair read is off, one tap corrects it.
+
+The only makeup is one lip tint. It keeps her exact lip depth, never darker and never lighter, and adds a touch of rose, pink or red. It runs on YouCam Makeup Virtual Try-On with skin smoothing switched off, so her skin stays exactly as it is.
+
+Hair comes next. AI Hairstyle tries styles chosen for her face shape and keeps her own hair colour. AI Hair Color adds shine, or a soft glaze.
+
+Her clothes palette comes from her undertone and the contrast between her skin and hair. Outfits from YouCam's catalogue in those colours go straight onto her photo with AI Clothes.
+
+AI Skin Analysis leads with what's already working. Then Care from within shows her lowest areas, with the nutrients involved, the published daily amounts for adult women, everyday foods and simple habits, each with its source.
+
+The same rules work for every skin tone. Here the tint follows a deeper lip at its own depth, and the clothes follow her colouring.
+
+Results are cached, and the API key stays on the server. For shoppers and stores, that means fewer wrong buys, and more women seeing themselves as they are. Beauty Within, built with the YouCam API.
