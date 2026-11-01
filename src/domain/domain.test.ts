@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { CAST } from './cast';
-import { skinStory, NUTRIENTS } from './care';
+import { amountFor, foodsFor, NUTRIENTS, skinStory, type Lifestyle } from './care';
 import { deltaE2000, hexToLab, labToHex, undertoneOf } from './color';
 import hairTemplates from '../../fixtures/hair-templates.json';
-import { hairColours, pickStyles, withHair } from './hair';
+import { pickStyles, withHair } from './hair';
 import { OUTFITS, pickOutfits } from './outfits';
 import { lipTints } from './lip';
 import { paletteFor, readPalette, WARDROBE } from './palette';
@@ -99,6 +99,35 @@ describe('skin story', () => {
     }
   });
 
+  it('puts her own hair and skin concerns first, and keeps them out of strengths', () => {
+    const life: Lifestyle = { hair: ['hair_fall'], skin: ['moisture'], diet: 'vegan', weightKg: 55, waterGlasses: 5, sleepHours: 6 };
+    const s = skinStory(CAST[0].portrait, life);
+    expect(s.care[0].key).toBe('hair:hair_fall');
+    expect(s.care[1]).toMatchObject({ key: 'skin:moisture', why: 'you' });
+    expect(s.strengths.map((x) => x.concern)).not.toContain('moisture');
+    expect(s.care.filter((c) => c.key === 'skin:moisture')).toHaveLength(1);
+    expect(s.notes.join(' ')).toMatch(/5 glasses/);
+    expect(s.notes.join(' ')).toMatch(/6 hours/);
+    expect(s.notes.join(' ')).toMatch(/B12/);
+    const protein = s.care[0].nutrients.find((n) => n.nutrient.id === 'protein')!;
+    expect(protein.amount).toMatch(/about 44 g for you \(55 kg\)/);
+  });
+
+  it('only suggests foods that fit her diet', () => {
+    const protein = NUTRIENTS.protein;
+    expect(foodsFor(protein, 'vegan')).toEqual(['dal', 'soya chunks', 'tofu', 'peanuts']);
+    expect(foodsFor(protein, 'vegetarian')).toContain('paneer');
+    expect(foodsFor(protein, 'vegetarian')).not.toContain('eggs');
+    expect(foodsFor(protein, 'eggetarian')).toContain('eggs');
+    expect(foodsFor(protein, 'eggetarian')).not.toContain('chicken');
+    for (const n of Object.values(NUTRIENTS)) expect(foodsFor(n, 'vegan').length).toBeGreaterThan(0);
+  });
+
+  it('gives a personal protein figure only for a sensible weight', () => {
+    expect(amountFor(NUTRIENTS.protein, { hair: [], skin: [], weightKg: 500 })).toBe(NUTRIENTS.protein.amount);
+    expect(amountFor(NUTRIENTS.vitC, { hair: [], skin: [], weightKg: 60 })).toBe(NUTRIENTS.vitC.amount);
+  });
+
   it('every nutrient has a daily amount, foods and a source', () => {
     for (const n of Object.values(NUTRIENTS)) {
       expect(n.amount).toMatch(/\d/);
@@ -128,11 +157,6 @@ describe('hair', () => {
     }
   });
 
-  it('starts from her own hair colour', () => {
-    const [own, glaze] = hairColours('#2a1d18');
-    expect(own.hex).toBe('#2a1d18');
-    expect(deltaE2000(hexToLab(glaze.hex), hexToLab(own.hex))).toBeLessThan(12);
-  });
 });
 
 describe('outfits', () => {

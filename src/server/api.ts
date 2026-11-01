@@ -1,12 +1,11 @@
 // The app's API, independent of the host. Cloudflare Pages Functions call handle().
 // Every YouCam result is cached by content hash, and live calls stop while the account is below UNIT_FLOOR.
 import { castById } from '../domain/cast';
-import { hairColours, HAIR_SHADES, type HairShade } from '../domain/hair';
 import { outfitById } from '../domain/outfits';
 import hairTemplates from '../../fixtures/hair-templates.json';
 import { lipTints, type TintName } from '../domain/lip';
 import { buildPortrait } from '../domain/scan';
-import { clothesRequest, hairColourRequest, hairStyleRequest, lipTintRequest, type Src } from '../domain/tryon';
+import { clothesRequest, hairStyleRequest, lipTintRequest, type Src } from '../domain/tryon';
 import { CONCERNS, type Portrait } from '../domain/types';
 import { resultImageUrl, YouCam, YouCamError, type TaskKind } from './youcam';
 
@@ -32,20 +31,34 @@ const DAY = 86_400;
 const LIVE_TTL = 2 * DAY; // visitors' photos and results are dropped after two days
 const PORTRAIT_COST = 14 + 20 + 10; // skin analysis + colour tones + face shape
 
-export type TryOn =
-  | { kind: 'lip'; tint: TintName }
-  | { kind: 'hairColour'; option: number; hair: HairShade }
-  | { kind: 'hairStyle'; templateId: string }
-  | { kind: 'clothes'; outfitId: string };
+/**
+ * A look is up to three layers on one photo, always applied in this order so each result feeds the next:
+ * the outfit, then the hairstyle, then the lip tint (makeup last, on the final face).
+ * Hair colour is left out on purpose: YouCam's hair-colour call brightened the whole photo, face included.
+ */
+export interface Look {
+  clothes?: string;
+  hairStyle?: string;
+  lip?: TintName;
+}
+
+type Layer = { kind: 'clothes'; outfitId: string } | { kind: 'hairStyle'; templateId: string } | { kind: 'lip'; tint: TintName };
+
+const LAYER_TASK: Record<Layer['kind'], { task: TaskKind; units: number }> = {
+  clothes: { task: 'cloth-v4', units: 2 },
+  hairStyle: { task: 'hair-transfer', units: 2 },
+  lip: { task: 'makeup-vto', units: 1 },
+};
 
 const HAIR_TEMPLATE_IDS = new Set(hairTemplates.map((t) => t.id));
 
-const TRYON_TASK: Record<TryOn['kind'], { task: TaskKind; units: number }> = {
-  lip: { task: 'makeup-vto', units: 1 },
-  hairColour: { task: 'hair-color', units: 1 },
-  hairStyle: { task: 'hair-transfer', units: 2 },
-  clothes: { task: 'cloth-v4', units: 2 },
-};
+export function layersOf(look: Look): Layer[] {
+  const out: Layer[] = [];
+  if (look.clothes) out.push({ kind: 'clothes', outfitId: look.clothes });
+  if (look.hairStyle) out.push({ kind: 'hairStyle', templateId: look.hairStyle });
+  if (look.lip) out.push({ kind: 'lip', tint: look.lip });
+  return out;
+}
 
 const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), { status, headers: { 'Content-Type': 'application/json' } });
@@ -84,8 +97,6 @@ async function ledger(env: Env, entry: Record<string, unknown>) {
 interface StoredPortrait {
   portrait: Portrait;
   photoKey: string;
-  fileId?: string;
-  fileIdAt?: number;
 }
 
 export async function handle(req: Request, env: Env): Promise<Response> {
@@ -101,7 +112,7 @@ export async function handle(req: Request, env: Env): Promise<Response> {
       return json([...castById.values()].map((c) => ({ id: c.id, photo: c.photo, hair: c.hair, portrait: c.portrait })));
     }
     if (req.method === 'POST' && path === '/portrait') return await portrait(req, env);
-    if (req.method === 'POST' && path === '/tryon') return await tryOn(req, env);
+    if (req.method === 'POST' && path === '/look') return await look(req, env);
 
     const img = /^\/img\/([a-z0-9_-]+)$/i.exec(path);
     if (req.method === 'GET' && img) {
@@ -151,19 +162,12 @@ async function portrait(req: Request, env: Env): Promise<Response> {
   return json({ portrait: p, photo: `/api/img/${photoKey}` });
 }
 
-function bodyFor(t: TryOn, s: Src, p: Portrait) {
+function bodyFor(t: Layer, s: Src, p: Portrait) {
   switch (t.kind) {
     case 'lip': {
       const tint = lipTints(p.tone.lip).find((x) => x.name === t.tint);
       if (!tint) throw new YouCamError('unknown tint', 400);
       return lipTintRequest(s, tint);
-    }
-    case 'hairColour': {
-      const shade = HAIR_SHADES[t.hair];
-      if (!shade) throw new YouCamError('unknown hair colour', 400);
-      const option = hairColours(shade)[t.option];
-      if (!option) throw new YouCamError('unknown hair colour', 400);
-      return hairColourRequest(s, option);
     }
     case 'hairStyle':
       if (!HAIR_TEMPLATE_IDS.has(t.templateId)) throw new YouCamError('unknown hairstyle', 400);
@@ -176,45 +180,62 @@ function bodyFor(t: TryOn, s: Src, p: Portrait) {
   }
 }
 
-async function tryOn(req: Request, env: Env): Promise<Response> {
-  const { portraitId, tryOn: t } = (await req.json()) as { portraitId?: string; tryOn?: TryOn };
-  if (!portraitId || !t || !(t.kind in TRYON_TASK)) return json({ error: 'portraitId and tryOn required' }, 400);
-
-  const key = `tryon-${await sha256(`${portraitId}|${JSON.stringify(t)}`)}`;
-  if (await env.CACHE.get(`img:${key}`, 'arrayBuffer')) return json({ image: `/api/img/${key}`, cached: true });
+/** Builds a look layer by layer. Every prefix of layers is cached, so changing one layer re-runs only from there. */
+async function look(req: Request, env: Env): Promise<Response> {
+  const { portraitId, look: wanted } = (await req.json()) as { portraitId?: string; look?: Look };
+  if (!portraitId || !wanted) return json({ error: 'portraitId and look required' }, 400);
 
   const cast = castById.get(portraitId);
   const stored = cast ? undefined : ((await env.CACHE.get(`portrait:${portraitId}`, 'json')) as StoredPortrait | null);
   if (!cast && !stored) return json({ error: 'This portrait has expired. Start again.' }, 404);
   const p = cast ? cast.portrait : stored!.portrait;
 
+  const layers = layersOf(wanted);
+  if (!layers.length) return json({ image: null, layers: [] });
+  const tmp = { url: '' } as Src;
+  for (const l of layers) bodyFor(l, tmp, p); // validates every layer before any unit is spent
+
+  const keys: string[] = [];
+  for (let i = 1; i <= layers.length; i++) keys.push(`look-${await sha256(`${portraitId}|${JSON.stringify(layers.slice(0, i))}`)}`);
+
+  // Longest prefix already rendered.
+  let done = 0;
+  let prev: ArrayBuffer | null = null;
+  for (let i = layers.length; i >= 1; i--) {
+    const hit = await env.CACHE.get(`img:${keys[i - 1]}`, 'arrayBuffer');
+    if (hit) {
+      done = i;
+      prev = hit;
+      break;
+    }
+  }
+  if (done === layers.length) return json({ image: `/api/img/${keys[done - 1]}`, cached: true });
+
   const yc = client(env);
   if (!yc) return json({ error: 'Try-ons need the API key on this deployment.' }, 503);
-  const { task, units } = TRYON_TASK[t.kind];
-  const why = await gate(env, yc, units);
+  const cost = layers.slice(done).reduce((n, l) => n + LAYER_TASK[l.kind].units, 0);
+  const why = await gate(env, yc, cost);
   if (why) return json({ error: why }, 429);
 
-  // Sample portraits use YouCam's own hosted photo; a visitor's photo is re-uploaded when its file id is stale.
-  let s: Src;
-  if (cast) s = { url: cast.photo };
-  else {
-    const fresh = stored!.fileId && stored!.fileIdAt && Date.now() - stored!.fileIdAt < 20 * 60_000;
-    if (!fresh) {
+  for (let i = done; i < layers.length; i++) {
+    const layer = layers[i];
+    let s: Src;
+    if (prev) s = { fileId: await yc.upload(prev, 'image/jpeg', 'look.jpg') };
+    else if (cast) s = { url: cast.photo }; // sample portraits use YouCam's own hosted photo
+    else {
       const bytes = await env.CACHE.get(`img:${stored!.photoKey}`, 'arrayBuffer');
       if (!bytes) return json({ error: 'This portrait has expired. Start again.' }, 404);
-      stored!.fileId = await yc.upload(bytes, 'image/jpeg');
-      stored!.fileIdAt = Date.now();
-      await env.CACHE.put(`portrait:${portraitId}`, JSON.stringify(stored), { expirationTtl: LIVE_TTL });
+      s = { fileId: await yc.upload(bytes, 'image/jpeg') };
     }
-    s = { fileId: stored!.fileId };
+    const { task, units } = LAYER_TASK[layer.kind];
+    const result = await yc.run(task, bodyFor(layer, s, p), { timeoutMs: 90_000 });
+    const out = resultImageUrl(result);
+    if (!out) return json({ error: 'The try-on came back without an image.' }, 502);
+    const img = await fetch(out);
+    if (!img.ok) return json({ error: 'Could not fetch the try-on image.' }, 502);
+    prev = await img.arrayBuffer();
+    await env.CACHE.put(`img:${keys[i]}`, prev, cast ? undefined : { expirationTtl: LIVE_TTL });
+    await ledger(env, { kind: layer.kind, units, portrait: portraitId });
   }
-
-  const result = await yc.run(task, bodyFor(t, s, p), { timeoutMs: 90_000 });
-  const out = resultImageUrl(result);
-  if (!out) return json({ error: 'The try-on came back without an image.' }, 502);
-  const img = await fetch(out);
-  if (!img.ok) return json({ error: 'Could not fetch the try-on image.' }, 502);
-  await env.CACHE.put(`img:${key}`, await img.arrayBuffer(), cast ? undefined : { expirationTtl: LIVE_TTL });
-  await ledger(env, { kind: t.kind, units, portrait: portraitId });
-  return json({ image: `/api/img/${key}` });
+  return json({ image: `/api/img/${keys[layers.length - 1]}` });
 }

@@ -1,9 +1,9 @@
 // Browser side of the API. The YouCam key never reaches the browser; everything goes through /api.
 import type { HairShade } from './domain/hair';
 import type { Portrait } from './domain/types';
-import type { TryOn } from './server/api';
+import type { Look } from './server/api';
 
-export type { TryOn };
+export type { Look };
 
 export interface Status {
   live: boolean;
@@ -35,13 +35,62 @@ export function makePortrait(photo: Blob, face: Blob) {
   return call<{ portrait: Portrait; photo: string }>('/portrait', { method: 'POST', body: form });
 }
 
-export async function tryOn(portraitId: string, t: TryOn): Promise<string> {
-  const r = await call<{ image: string }>('/tryon', {
+/** Renders the look (outfit, hairstyle, lip tint) on the portrait. Returns null when the look is empty. */
+export async function buildLook(portraitId: string, look: Look): Promise<string | null> {
+  const r = await call<{ image: string | null }>('/look', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ portraitId, tryOn: t }),
+    body: JSON.stringify({ portraitId, look }),
   });
   return r.image;
+}
+
+/** YouCam's JS Camera Kit: opens the camera with face alignment, lighting and size guidance, and returns the photo. */
+export function openCameraKit(onPhoto: (file: File) => void, onError: (msg: string) => void) {
+  const w = window as unknown as { YMK?: YMK };
+  const start = () => {
+    try {
+      w.YMK!.init({ faceDetectionMode: 'makeup', imageFormat: 'base64', language: 'enu' });
+      w.YMK!.openCameraKit();
+    } catch (e) {
+      onError(`Camera could not start: ${(e as Error).message}`);
+    }
+  };
+  cameraHandler = async (result) => {
+    const item = result?.images?.[0]?.image;
+    if (!item) return;
+    const blob = typeof item === 'string' ? await (await fetch(item.startsWith('data:') ? item : `data:image/jpeg;base64,${item}`)).blob() : item;
+    w.YMK?.close?.();
+    onPhoto(new File([blob], 'camera.jpg', { type: blob.type || 'image/jpeg' }));
+  };
+  if (!cameraErrorHooked) {
+    cameraErrorHooked = true;
+    // The kit rejects with "error.no.camera" when there's no camera or permission was refused.
+    window.addEventListener('unhandledrejection', (e) => {
+      if (/camera/i.test(String(e.reason))) onError('No camera found, or camera access was blocked. Upload a photo instead.');
+    });
+  }
+  if (w.YMK) return start();
+  // The kit's YMKAsyncInit hook doesn't fire when the script is added late, so start from the script's load event.
+  const tag = document.createElement('script');
+  tag.src = 'https://plugins-media.makeupar.com/v2.5-camera-kit/sdk.js';
+  tag.onload = () => {
+    if (!w.YMK) return onError('The YouCam Camera Kit could not start. Upload a photo instead.');
+    w.YMK.addEventListener('faceDetectionCaptured', (r: CameraResult) => cameraHandler?.(r));
+    start();
+  };
+  tag.onerror = () => onError('The YouCam Camera Kit could not load. Upload a photo instead.');
+  document.body.appendChild(tag);
+}
+
+type CameraResult = { images?: { image: string | Blob }[] };
+let cameraHandler: ((r: CameraResult) => void) | undefined;
+let cameraErrorHooked = false;
+interface YMK {
+  init(o: Record<string, unknown>): void;
+  openCameraKit(): void;
+  close?(): void;
+  addEventListener(name: string, cb: (r: CameraResult) => void): void;
 }
 
 export interface Frame {

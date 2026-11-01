@@ -1,6 +1,5 @@
 // Request bodies for the YouCam try-ons. One rule runs through all of them: her face and skin are never retouched.
 import type { LipTint } from './lip';
-import type { HairColourOption } from './hair';
 
 export type Src = { fileId?: string; url?: string };
 const src = (s: Src) => (s.fileId ? { src_file_id: s.fileId } : { src_file_url: s.url });
@@ -22,15 +21,6 @@ export function lipTintRequest(s: Src, tint: LipTint) {
         palettes: [{ color: tint.hex.toUpperCase(), texture: 'satin', colorIntensity: 45 }],
       },
     ],
-  };
-}
-
-/** POST /s2s/v2.0/task/hair-color: 1 unit. */
-export function hairColourRequest(s: Src, c: HairColourOption) {
-  return {
-    ...src(s),
-    pattern: { name: 'full' },
-    palettes: [{ color: c.hex.toUpperCase(), color_intensity: c.intensity, shine_intensity: c.shine }],
   };
 }
 

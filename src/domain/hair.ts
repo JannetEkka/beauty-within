@@ -1,5 +1,4 @@
-// Hair that frames her face, in her own hair colour. Colour changes stay subtle: shine, or a soft glaze.
-import { hexToLab, labToHex } from './color';
+// Hair that frames her face, always in her own hair colour.
 import type { FaceShape } from './types';
 
 export interface HairAdvice {
@@ -55,24 +54,6 @@ export type HairShade = keyof typeof HAIR_SHADES;
 export function shadeFromName(name: string | undefined): HairShade | undefined {
   if (!name) return undefined;
   return (Object.keys(HAIR_SHADES) as HairShade[]).find((k) => k.toLowerCase() === name.toLowerCase());
-}
-
-export interface HairColourOption {
-  name: string;
-  hex: string;
-  intensity: number;
-  shine: number;
-  note: string;
-}
-
-/** Her own colour with shine, and a soft glaze one small step warmer. No bleach-level changes. */
-export function hairColours(hairHex: string): HairColourOption[] {
-  const lab = hexToLab(hairHex);
-  const glaze = labToHex({ L: Math.min(lab.L + 4, 60), a: lab.a + 4, b: lab.b + 6 });
-  return [
-    { name: 'Your colour, with shine', hex: hairHex, intensity: 20, shine: 70, note: 'Nothing changes but the gloss.' },
-    { name: 'Soft warm glaze', hex: glaze, intensity: 35, shine: 55, note: 'A gentle warmth over your natural colour.' },
-  ];
 }
 
 /** Her portrait with the hair colour she confirmed in place of YouCam's read. */
