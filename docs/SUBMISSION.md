@@ -25,6 +25,7 @@ Pick a sample portrait, take a photo with the camera, or upload one.
   - **Clothes:** six colours picked from your undertone, the contrast between your skin and hair, and your eye and lip colour. Outfits from YouCam's clothes catalogue in those colours go on with AI Clothes.
   - **Hair:** styles from YouCam's hairstyle templates chosen for your face shape. AI Hairstyle keeps your own hair colour.
   - **Lip tint, the only makeup:** your own lip colour at exactly the same depth, with a touch of rose, pink or red. It never goes darker or lighter, so it works the same for a deep-skinned woman and a fair one. Makeup Virtual Try-On runs with skin smoothing set to 0.
+- **Zoom to compare.** Tap any photo to open it full screen, tap again to zoom in on the lips or hair, and flip between "As you are" and "Your look" at the same zoom.
 - **Care from within.** You can tell the app your diet (vegetarian, eggetarian, non-vegetarian, vegan), weight, water, sleep, activity and time in the sun, plus your own hair and skin concerns (hair fall, frizz, dandruff, dryness, breakouts and more). AI Skin Analysis shows what's already working first. Then each concern, and your lowest scan areas, get the nutrients involved, the published daily amounts for adult women (NIH Office of Dietary Supplements, National Academies), foods that fit your diet and a few habits, each with a source link. Protein comes as a gram figure from your weight. It's general information, not a prescription.
 
 ## Consumer and eCommerce value
@@ -38,12 +39,13 @@ For a shopper, every suggestion is something that suits her as she is: a lip sha
 - A look is built layer by layer: each try-on runs on the previous result. Every prefix of layers is cached in Workers KV, so changing one layer only re-runs from there, and repeat views cost no API units.
 - Colour maths in CIELAB with CIEDE2000, for lip depth, palette contrast and matching outfits to colours.
 - Live calls stop below a unit floor, so the free units last through judging.
-- 35 unit tests cover the colour maths, the response parsers, the care rules and the layer order.
+- 37 unit tests cover the colour maths, the response parsers, the care rules and the layer order.
 
 ## Challenges
 
 - Reading undertone from hue alone called almost every deep skin tone "cool", because deep skin sits redder in colour space. The reading now adjusts for depth, and a test checks it.
 - YouCam's hair-colour try-on brightened the whole photo, face and background included, not only the hair. I measured it (about 10 to 13 levels brighter on the cheek and background) and took hair colour out, since the point is not to change her face.
+- The first lip tint was nearly invisible, and measuring lips before and after showed the makeup engine darkens them by about 5 L. I calibrated against the rendered lips on three skin tones: the colour sent is lifted so the result lands on her own lip depth (within about 2 L), with enough added colour to see, capped for lips that are already rich in colour.
 - YouCam read two black-haired women as blonde, so the app lets you fix the hair colour.
 - The sample faces score very high on skin, so Care from within shows each woman's lowest areas and whatever she asks about, instead of only scores under 60.
 

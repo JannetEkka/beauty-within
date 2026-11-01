@@ -150,6 +150,7 @@ function Studio({ current, onBack }: { current: Current; onBack: () => void }) {
   const [look, setLook] = useState<Look>({});
   const [render, setRender] = useState<{ image?: string | null; busy?: boolean; error?: string }>({});
   const [life, setLife] = useState<Lifestyle>(loadLifestyle);
+  const [zoom, setZoom] = useState<'before' | 'after'>();
   const req = useRef(0);
 
   const p: Portrait = withHair(current.portrait, hair);
@@ -191,10 +192,10 @@ function Studio({ current, onBack }: { current: Current; onBack: () => void }) {
     <section className="studio">
       <aside className="mirror card" aria-live="polite">
         <div className={`pair ${chips.length ? 'two' : ''}`}>
-          <figure><img src={current.photo} alt="As you are" /><figcaption>As you are</figcaption></figure>
+          <figure><button className="zoomable" onClick={() => setZoom('before')} aria-label="Enlarge: as you are"><img src={current.photo} alt="As you are" /></button><figcaption>As you are</figcaption></figure>
           {chips.length > 0 && (
             <figure>
-              {render.image ? <img src={render.image} alt="Your look" className={render.busy ? 'dim' : ''} /> : <div className="ph">{render.busy ? 'Trying it on…' : ''}</div>}
+              {render.image ? <button className="zoomable" onClick={() => setZoom('after')} aria-label="Enlarge: your look"><img src={render.image} alt="Your look" className={render.busy ? 'dim' : ''} /></button> : <div className="ph">{render.busy ? 'Trying it on…' : ''}</div>}
               <figcaption>{render.busy ? 'Trying it on…' : 'Your look'}</figcaption>
             </figure>
           )}
@@ -208,8 +209,18 @@ function Studio({ current, onBack }: { current: Current; onBack: () => void }) {
         )}
         {!chips.length && <p className="muted small">Pick an outfit, a hairstyle and a lip tint from the tabs. They layer into one look.</p>}
         {render.error && <p className="alert small">{render.error}</p>}
+        <p className="muted small">Tap a photo to enlarge it.</p>
         <button className="link" onClick={onBack}>Choose another portrait</button>
       </aside>
+      {zoom && (
+        <Lightbox
+          before={current.photo}
+          after={chips.length && render.image ? render.image : undefined}
+          which={zoom}
+          onSwitch={setZoom}
+          onClose={() => setZoom(undefined)}
+        />
+      )}
 
       <div className="panel">
         <div className="tabs" role="tablist">
@@ -391,6 +402,57 @@ function AboutYou({ life, setLife }: { life: Lifestyle; setLife: (l: Lifestyle) 
         </div>
       </fieldset>
       </>}
+    </div>
+  );
+}
+
+/** Full-screen view of the portrait and the look. Tap the photo to zoom in 2.5× at that spot; the zoom holds when switching. */
+function Lightbox({ before, after, which, onSwitch, onClose }: {
+  before: string;
+  after?: string;
+  which: 'before' | 'after';
+  onSwitch: (w: 'before' | 'after') => void;
+  onClose: () => void;
+}) {
+  const [origin, setOrigin] = useState<{ x: number; y: number }>();
+  const shown = which === 'after' && after ? after : before;
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+      if (after && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) onSwitch(which === 'after' ? 'before' : 'after');
+    };
+    window.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [after, which, onClose, onSwitch]);
+  function toggleZoom(e: React.MouseEvent<HTMLImageElement>) {
+    if (origin) return setOrigin(undefined);
+    const r = e.currentTarget.getBoundingClientRect();
+    setOrigin({ x: ((e.clientX - r.left) / r.width) * 100, y: ((e.clientY - r.top) / r.height) * 100 });
+  }
+  return (
+    <div className="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged photo" onClick={onClose}>
+      <div className="lightbox-bar" onClick={(e) => e.stopPropagation()}>
+        {after && (
+          <div className="seg">
+            <button className={which === 'before' ? 'on' : ''} onClick={() => onSwitch('before')}>As you are</button>
+            <button className={which === 'after' ? 'on' : ''} onClick={() => onSwitch('after')}>Your look</button>
+          </div>
+        )}
+        <span className="hint">{origin ? 'Tap to zoom out' : 'Tap the photo to zoom in'}</span>
+        <button className="close" onClick={onClose} aria-label="Close">✕</button>
+      </div>
+      <div className="lightbox-stage" onClick={(e) => e.stopPropagation()}>
+        <img
+          src={shown}
+          alt={which === 'after' ? 'Your look' : 'As you are'}
+          onClick={toggleZoom}
+          style={origin ? { transform: 'scale(2.5)', transformOrigin: `${origin.x}% ${origin.y}%`, cursor: 'zoom-out' } : { cursor: 'zoom-in' }}
+        />
+      </div>
     </div>
   );
 }

@@ -5,7 +5,7 @@ import { deltaE2000, hexToLab, labToHex, undertoneOf } from './color';
 import hairTemplates from '../../fixtures/hair-templates.json';
 import { pickStyles, withHair } from './hair';
 import { OUTFITS, pickOutfits } from './outfits';
-import { lipTints } from './lip';
+import { lipTints, renderLift } from './lip';
 import { paletteFor, readPalette, WARDROBE } from './palette';
 import { findSkinType, parseFaceShape, parseSkinAnalysis, parseSkinTone } from './scan';
 import { clothesRequest, hairStyleRequest, lipTintRequest, NO_SMOOTHING } from './tryon';
@@ -46,6 +46,26 @@ describe('lip tints', () => {
       const tints = lipTints(m.portrait.tone.lip);
       expect(tints.map((t) => t.name)).toEqual(['Pink', 'Rose', 'Red']);
       for (const t of tints) expect(Math.abs(hexToLab(t.hex).L - lipL)).toBeLessThan(1.5);
+    }
+  });
+
+  it('lifts the colour we send so the rendered lips land on her depth, less for lighter lips', () => {
+    expect(renderLift(40)).toBeCloseTo(12.25, 1);
+    expect(renderLift(63)).toBeLessThan(7);
+    for (const m of CAST) {
+      for (const t of lipTints(m.portrait.tone.lip)) {
+        expect(hexToLab(t.renderHex).L).toBeGreaterThan(hexToLab(t.hex).L + 3);
+      }
+    }
+  });
+
+  it('adds a visible touch of colour', () => {
+    for (const m of CAST) {
+      const lip = hexToLab(m.portrait.tone.lip!);
+      for (const t of lipTints(m.portrait.tone.lip)) {
+        const c = hexToLab(t.hex);
+        expect(Math.hypot(c.a, c.b)).toBeGreaterThan(Math.hypot(lip.a, lip.b) + 3);
+      }
     }
   });
 

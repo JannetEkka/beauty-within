@@ -1,160 +1,164 @@
 1
-00:00:00,252 --> 00:00:02,639
+00:00:00,394 --> 00:00:02,781
 Every woman is already beautiful.
 
 2
-00:00:03,252 --> 00:00:06,937
+00:00:03,394 --> 00:00:07,079
 A good hairstyle and the right lip colour go a long way,
 
 3
-00:00:06,977 --> 00:00:09,564
+00:00:07,119 --> 00:00:09,706
 but confidence is what makes you shine.
 
 4
-00:00:10,177 --> 00:00:11,687
+00:00:10,319 --> 00:00:11,829
 Beauty Within is a web app
 
 5
-00:00:11,727 --> 00:00:13,752
+00:00:11,869 --> 00:00:13,894
 built on the YouCam API.
 
 6
-00:00:14,377 --> 00:00:17,324
+00:00:14,519 --> 00:00:17,466
 Pick a sample portrait, or use your camera,
 
 7
-00:00:17,364 --> 00:00:19,324
+00:00:17,506 --> 00:00:19,466
 where YouCam's JS Camera Kit
 
 8
-00:00:19,364 --> 00:00:21,377
+00:00:19,506 --> 00:00:21,519
 guides your face into place.
 
 9
-00:00:22,063 --> 00:00:25,660
+00:00:22,202 --> 00:00:25,799
 The Facial Color Tones Analyzer reads her real skin,
 
 10
-00:00:25,700 --> 00:00:26,960
+00:00:25,839 --> 00:00:27,099
 lip and eye colour,
 
 11
-00:00:27,000 --> 00:00:30,025
+00:00:27,139 --> 00:00:30,164
 and the Face Analyzer reads her face shape.
 
 12
-00:00:30,625 --> 00:00:33,788
+00:00:30,764 --> 00:00:33,927
 Everything after this starts from her own colours.
 
 13
-00:00:34,572 --> 00:00:37,107
+00:00:34,711 --> 00:00:37,246
 Her clothes palette comes from her undertone
 
 14
-00:00:37,147 --> 00:00:40,072
+00:00:37,286 --> 00:00:40,211
 and the contrast between her skin and hair.
 
 15
-00:00:40,697 --> 00:00:43,419
+00:00:40,836 --> 00:00:43,558
 She picks an outfit from YouCam's catalogue,
 
 16
-00:00:43,459 --> 00:00:46,234
+00:00:43,598 --> 00:00:46,373
 and AI Clothes puts it on her photo.
 
 17
-00:00:46,978 --> 00:00:49,753
+00:00:47,116 --> 00:00:49,891
 Hairstyles are chosen for her face shape.
 
 18
-00:00:50,353 --> 00:00:53,650
+00:00:50,491 --> 00:00:53,788
 AI Hairstyle layers the cut onto the same look,
 
 19
-00:00:53,690 --> 00:00:55,803
+00:00:53,828 --> 00:00:55,941
 and keeps her own hair colour.
 
 20
-00:00:56,584 --> 00:01:00,669
+00:00:56,722 --> 00:01:00,807
 Then the only makeup: a lip tint at her exact lip depth,
 
 21
-00:01:00,709 --> 00:01:03,246
+00:01:00,847 --> 00:01:03,384
 with a touch of rose, pink or red.
 
 22
-00:01:03,871 --> 00:01:07,194
+00:01:04,009 --> 00:01:07,332
 Makeup Virtual Try-On runs with skin smoothing off,
 
 23
-00:01:07,234 --> 00:01:09,359
+00:01:07,372 --> 00:01:09,497
 so her skin stays as it is.
 
 24
-00:01:09,971 --> 00:01:12,081
-The choices stack into one look,
+00:01:10,109 --> 00:01:12,697
+Tap the photo to zoom in and compare.
 
 25
-00:01:12,121 --> 00:01:14,559
-and any of them can come off again.
+00:01:13,334 --> 00:01:15,444
+The choices stack into one look,
 
 26
-00:01:15,289 --> 00:01:19,186
-In Care, she tells us about herself: vegetarian,
+00:01:15,484 --> 00:01:17,922
+and any of them can come off again.
 
 27
-00:01:19,226 --> 00:01:22,626
-fifty-eight kilos, and worried about hair fall.
+00:01:18,623 --> 00:01:22,520
+In Care, she tells us about herself: vegetarian,
 
 28
-00:01:23,239 --> 00:01:25,461
-AI Skin Analysis leads with
+00:01:22,560 --> 00:01:25,960
+fifty-eight kilos, and worried about hair fall.
 
 29
-00:01:25,501 --> 00:01:27,126
-what's already working.
+00:01:26,573 --> 00:01:28,795
+AI Skin Analysis leads with
 
 30
-00:01:27,739 --> 00:01:30,624
-Care from within lists the nutrients involved,
+00:01:28,835 --> 00:01:30,460
+what's already working.
 
 31
-00:01:30,664 --> 00:01:34,274
-the published daily amounts, vegetarian foods only,
+00:01:31,073 --> 00:01:33,958
+Care from within lists the nutrients involved,
 
 32
-00:01:34,314 --> 00:01:37,401
-and simple habits, each with its source.
+00:01:33,998 --> 00:01:37,608
+the published daily amounts, vegetarian foods only,
 
 33
-00:01:38,098 --> 00:01:40,948
-The same rules work for every skin tone.
+00:01:37,648 --> 00:01:40,735
+and simple habits, each with its source.
 
 34
-00:01:41,560 --> 00:01:44,958
-Here the tint follows a deeper lip at its own depth,
+00:01:41,431 --> 00:01:44,281
+The same rules work for every skin tone.
 
 35
-00:01:44,998 --> 00:01:47,248
-and the outfit follows her colours.
+00:01:44,893 --> 00:01:48,291
+Here the tint follows a deeper lip at its own depth,
 
 36
-00:01:48,003 --> 00:01:49,438
-Results are cached,
+00:01:48,331 --> 00:01:50,581
+and the outfit follows her colours.
 
 37
-00:01:49,478 --> 00:01:52,203
-and the API key stays on the server.
+00:01:51,337 --> 00:01:52,772
+Results are cached,
 
 38
-00:01:52,815 --> 00:01:56,300
-For shoppers and stores, that means fewer wrong buys,
+00:01:52,812 --> 00:01:55,537
+and the API key stays on the server.
 
 39
-00:01:56,340 --> 00:01:59,215
-and more women seeing themselves as they are.
+00:01:56,149 --> 00:01:59,634
+For shoppers and stores, that means fewer wrong buys,
 
 40
-00:01:59,828 --> 00:02:03,015
+00:01:59,674 --> 00:02:02,549
+and more women seeing themselves as they are.
+
+41
+00:02:03,162 --> 00:02:06,349
 Beauty Within, built with the YouCam API.
 

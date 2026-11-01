@@ -42,7 +42,10 @@ export interface Look {
   lip?: TintName;
 }
 
-type Layer = { kind: 'clothes'; outfitId: string } | { kind: 'hairStyle'; templateId: string } | { kind: 'lip'; tint: TintName };
+type Layer = { kind: 'clothes'; outfitId: string } | { kind: 'hairStyle'; templateId: string } | { kind: 'lip'; tint: TintName; render: number };
+
+/** Bumped when the lip render changes, so cached looks with the old tint aren't served. 3: visible, depth-calibrated, capped for rich lips (11-02). */
+const LIP_RENDER = 3;
 
 const LAYER_TASK: Record<Layer['kind'], { task: TaskKind; units: number }> = {
   clothes: { task: 'cloth-v4', units: 2 },
@@ -56,7 +59,7 @@ export function layersOf(look: Look): Layer[] {
   const out: Layer[] = [];
   if (look.clothes) out.push({ kind: 'clothes', outfitId: look.clothes });
   if (look.hairStyle) out.push({ kind: 'hairStyle', templateId: look.hairStyle });
-  if (look.lip) out.push({ kind: 'lip', tint: look.lip });
+  if (look.lip) out.push({ kind: 'lip', tint: look.lip, render: LIP_RENDER });
   return out;
 }
 
