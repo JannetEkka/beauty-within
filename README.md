@@ -8,11 +8,14 @@ Built for the YouCam API Skin AI & eCommerce VTO hackathon.
 
 ## What it does
 
-- **Your colours:** the YouCam Facial Color Tones Analyzer measures skin, lips, eyes and hair. The undertone reading adjusts for skin depth, so deep skin isn't labelled "cool" just because it sits redder in colour space.
-- **Lip tint, the only makeup:** your own lip colour at exactly the same depth, with a touch of rose, pink or red. It is never darker and never lighter, for every skin tone. Skin smoothing is set to 0 on every makeup call (the engine's default is 50).
-- **Hair:** the Face Analyzer reads face shape, and hairstyle try-ons keep your own hair colour. Hair-colour options stay close to yours: shine, or a soft warm glaze.
-- **Clothes:** wardrobe colours chosen from your undertone, the contrast between your skin and hair, and echoes of your eye and lip colour. Outfits from YouCam's own clothes catalogue in those colours are tried on with AI Clothes. Menswear, a real fashion brand, national-team kits, costumes, swimwear and bottoms-only pieces are left out.
-- **Skin, read kindly:** AI Skin Analysis shows what's already working first. For her lowest areas, it lists the nutrients involved, the published daily amounts for adult women, everyday foods and simple habits, with sources (NIH Office of Dietary Supplements, National Academies). This is general information, not a prescription.
+- **Camera or upload:** YouCam's JS Camera Kit guides face position and lighting before it takes the photo.
+- **Your colours:** the Facial Color Tones Analyzer measures skin, lips and eyes; the Face Analyzer reads face shape. The undertone reading adjusts for skin depth, so deep skin isn't labelled "cool" just because it sits redder in colour space. Hair colour can be corrected with one tap.
+- **One look, in layers:** outfit, then hairstyle, then lip tint, each applied on the previous result (`/api/look`). Every prefix is cached in KV.
+  - **Clothes:** wardrobe colours from undertone, skin-to-hair contrast and her eye and lip colour; outfits from YouCam's own clothes catalogue in those colours (menswear, a real fashion brand, national-team kits, costumes, swimwear and bottoms-only pieces are left out).
+  - **Hair:** YouCam hairstyle templates matched to face shape, keeping her own hair colour.
+  - **Lip tint, the only makeup:** her own lip colour at exactly the same depth, with a touch of rose, pink or red. Skin smoothing is set to 0 on every makeup call (the engine's default is 50).
+- **Care from within:** About you (diet, weight, water, sleep, activity, sun, her own hair and skin concerns) plus AI Skin Analysis. Strengths first; then nutrients with published daily amounts for adult women, foods filtered by diet, and habits, with sources (NIH Office of Dietary Supplements, National Academies). General information, not a prescription.
+- **Not included:** hair-colour try-on. YouCam's hair-colour call brightened the whole photo, face included.
 
 ## YouCam APIs and units
 
@@ -22,11 +25,10 @@ Built for the YouCam API Skin AI & eCommerce VTO hackathon.
 | AI Facial Color Tones Analyzer | 20 |
 | AI Face Analyzer (face shape) | 10 |
 | AI Makeup Virtual Try-On (lip tint) | 1 |
-| AI Hair Color | 1 |
 | AI Hairstyle (v2.1 transfer) | 2 |
 | AI Clothes (v4) | 2 |
 
-A full portrait costs 44 units, plus 1–2 per try-on. Results are cached by content hash, and live calls stop below `UNIT_FLOOR`.
+A full portrait costs 44 units, plus 1–2 per layer of a look. Results are cached by content hash, and live calls stop below `UNIT_FLOOR`.
 
 ## Sample portraits
 

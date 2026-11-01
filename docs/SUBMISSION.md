@@ -17,13 +17,15 @@ Every woman is already beautiful. A good haircut and the right lipstick go a lon
 
 ## What it does
 
-Pick a sample portrait, or upload a chest-up photo and frame your face.
+Pick a sample portrait, take a photo with the camera, or upload one.
 
-- **Your colours.** The YouCam Facial Color Tones Analyzer measures skin, lip and eye colour, and the Face Analyzer reads face shape. Hair colour can be corrected with one tap, because the hair read was wrong on some photos.
-- **Lip tint, the only makeup.** Your own lip colour at exactly the same depth, with a touch of rose, pink or red. It never goes darker or lighter, so it works the same for a deep-skinned woman and a fair one. Makeup Virtual Try-On runs with skin smoothing set to 0.
-- **Hair.** Three styles from YouCam's hairstyle templates, chosen for your face shape, each keeping your own hair colour. AI Hair Color adds shine or a soft glaze.
-- **Clothes.** Six colours picked from your undertone, the contrast between your skin and hair, and your eye and lip colour. Outfits from YouCam's clothes catalogue in those colours go onto your photo with AI Clothes.
-- **Skin.** AI Skin Analysis shows what's already working first. Care from within then covers your lowest areas with the nutrients involved, the published daily amounts for adult women (NIH Office of Dietary Supplements, National Academies), everyday foods and a few habits, each with a source link. It's general information, not a prescription.
+- **Camera.** YouCam's JS Camera Kit opens the camera and guides face position, size and lighting before it takes the photo.
+- **Your colours.** The YouCam Facial Color Tones Analyzer measures skin, lip and eye colour, and the Face Analyzer reads face shape. Hair colour can be corrected with one tap, because YouCam's hair read was wrong on some photos.
+- **One look, in layers.** Clothes, a hairstyle and a lip tint stack onto the same photo, in that order, and any of them can come off again.
+  - **Clothes:** six colours picked from your undertone, the contrast between your skin and hair, and your eye and lip colour. Outfits from YouCam's clothes catalogue in those colours go on with AI Clothes.
+  - **Hair:** styles from YouCam's hairstyle templates chosen for your face shape. AI Hairstyle keeps your own hair colour.
+  - **Lip tint, the only makeup:** your own lip colour at exactly the same depth, with a touch of rose, pink or red. It never goes darker or lighter, so it works the same for a deep-skinned woman and a fair one. Makeup Virtual Try-On runs with skin smoothing set to 0.
+- **Care from within.** You can tell the app your diet (vegetarian, eggetarian, non-vegetarian, vegan), weight, water, sleep, activity and time in the sun, plus your own hair and skin concerns (hair fall, frizz, dandruff, dryness, breakouts and more). AI Skin Analysis shows what's already working first. Then each concern, and your lowest scan areas, get the nutrients involved, the published daily amounts for adult women (NIH Office of Dietary Supplements, National Academies), foods that fit your diet and a few habits, each with a source link. Protein comes as a gram figure from your weight. It's general information, not a prescription.
 
 ## Consumer and eCommerce value
 
@@ -32,16 +34,18 @@ For a shopper, every suggestion is something that suits her as she is: a lip sha
 ## How I built it
 
 - React and TypeScript on the front end, with Cloudflare Pages Functions for the API, so the YouCam key stays on the server.
-- Seven YouCam APIs: AI Skin Analysis, Facial Color Tones Analyzer, Face Analyzer, Makeup Virtual Try-On, AI Hairstyle (v2.1 transfer), AI Hair Color and AI Clothes (v4).
+- YouCam APIs: AI Skin Analysis, Facial Color Tones Analyzer, Face Analyzer, AI Clothes (v4), AI Hairstyle (v2.1 transfer), Makeup Virtual Try-On, and the JS Camera Kit in the browser.
+- A look is built layer by layer: each try-on runs on the previous result. Every prefix of layers is cached in Workers KV, so changing one layer only re-runs from there, and repeat views cost no API units.
 - Colour maths in CIELAB with CIEDE2000, for lip depth, palette contrast and matching outfits to colours.
-- Every YouCam result is cached in Workers KV by content hash, and live calls stop below a unit floor, so the free units last through judging.
-- 32 unit tests cover the colour maths, the response parsers and the rules.
+- Live calls stop below a unit floor, so the free units last through judging.
+- 35 unit tests cover the colour maths, the response parsers, the care rules and the layer order.
 
 ## Challenges
 
 - Reading undertone from hue alone called almost every deep skin tone "cool", because deep skin sits redder in colour space. The reading now adjusts for depth, and a test checks it.
-- YouCam read two black-haired women as blonde, so the app shows the read and lets you fix it.
-- The sample faces score very high on skin, so Care from within shows each woman's lowest areas instead of only scores under 60.
+- YouCam's hair-colour try-on brightened the whole photo, face and background included, not only the hair. I measured it (about 10 to 13 levels brighter on the cheek and background) and took hair colour out, since the point is not to change her face.
+- YouCam read two black-haired women as blonde, so the app lets you fix the hair colour.
+- The sample faces score very high on skin, so Care from within shows each woman's lowest areas and whatever she asks about, instead of only scores under 60.
 
 ## What's next
 
@@ -54,4 +58,4 @@ react, typescript, vite, cloudflare-pages, cloudflare-workers-kv, youcam-api
 
 ## Testing instructions
 
-No login. Open https://beauty-within.pages.dev, pick one of the five sample portraits and tap any lip tint, hairstyle, hair colour or outfit. Results for the sample portraits are cached. Your own photo works too, limited to 3 per device per day to protect the free API units. The sample photos are YouCam's own API sample images, and no third-party brands appear anywhere.
+No login. Open https://beauty-within.pages.dev, pick one of the five sample portraits, and use the tabs: choose an outfit, a hairstyle and a lip tint, and they stack into one look. In Care, fill in About you to tailor the plan. Results for the sample portraits are cached. Your own photo (camera or upload) works too, limited to 3 per device per day to protect the free API units. The sample photos are YouCam's own API sample images, and no third-party brands appear anywhere.
