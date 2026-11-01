@@ -51,6 +51,14 @@ export function parseSkinAnalysis(body: unknown): Pick<Scan, 'scores' | 'skinTyp
   const take = (type: string, o: Record<string, unknown>) => {
     const key = type.replace(/^hd_/, '').replace(/^dark_circle$/, 'dark_circle_v2');
     if (key === 'skin_type') {
+      // Live replies send one entry per region: { type: 'skin_type', region: 't_zone', skin_type: 'Oily' }.
+      if (typeof o.region === 'string') {
+        const label = findSkinType(o.skin_type);
+        if (o.region === 'whole') skinType.whole = label;
+        else if (o.region === 't_zone') skinType.tZone = label;
+        else if (o.region === 'u_zone') skinType.uZone = label;
+        return;
+      }
       skinType.whole = findSkinType(o.whole ?? o) ?? skinType.whole;
       skinType.tZone = findSkinType(o.t_zone) ?? skinType.tZone;
       skinType.uZone = findSkinType(o.u_zone) ?? skinType.uZone;
@@ -77,10 +85,8 @@ export function parseSkinAnalysis(body: unknown): Pick<Scan, 'scores' | 'skinTyp
 }
 
 export function parseSkinTone(body: unknown): Scan['tone'] {
-  const color = ((body as { data?: { results?: { color?: Record<string, string> } } })?.data?.results?.color ??
-    (body as { results?: { color?: Record<string, string> } })?.results?.color) as Record<string, string> | undefined;
+  const color = colourBlock(body);
   if (!color?.skin_color) throw new Error('Facial Color Tones result has no skin_color');
-  const hex = (v?: string) => (v ? (v.startsWith('#') ? v : `#${v}`).toLowerCase() : undefined);
   return {
     skin: hex(color.skin_color)!,
     lip: hex(color.lip_color),
@@ -89,6 +95,13 @@ export function parseSkinTone(body: unknown): Scan['tone'] {
     hair: hex(color.hair_color),
     hairName: color.hair_color_name,
   };
+}
+
+const hex = (v?: string) => (v ? (v.startsWith('#') ? v : `#${v}`).toLowerCase() : undefined);
+
+function colourBlock(body: unknown): Record<string, string> | undefined {
+  const b = body as { data?: { results?: { color?: Record<string, string> } }; results?: { color?: Record<string, string> } };
+  return b?.data?.results?.color ?? b?.results?.color;
 }
 
 const SHAPES: FaceShape[] = ['InvTriangle', 'Triangle', 'Diamond', 'Oblong', 'Square', 'Heart', 'Round', 'Oval'];
@@ -122,5 +135,15 @@ export function parseFaceShape(body: unknown): FaceShape | undefined {
 
 export function buildPortrait(id: string, source: Portrait['source'], skin: unknown, tone: unknown, face?: unknown): Portrait {
   const { scores, skinType } = parseSkinAnalysis(skin);
-  return { id, source, scores, skinType, tone: parseSkinTone(tone), faceShape: face ? parseFaceShape(face) : undefined };
+  const t = parseSkinTone(tone);
+  // The Face Analyzer also reads hair, lip and eye colour; use it where Color Tones left a gap.
+  const f = face ? colourBlock(face) : undefined;
+  if (f) {
+    t.hair ??= hex(f.hair_color);
+    t.hairName ??= f.hair_color_name;
+    t.lip ??= hex(f.lip_color);
+    t.eye ??= hex(f.eye_color);
+    t.eyeName ??= f.eye_color_name;
+  }
+  return { id, source, scores, skinType, tone: t, faceShape: face ? parseFaceShape(face) : undefined };
 }

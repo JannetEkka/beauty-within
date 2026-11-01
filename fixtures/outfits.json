@@ -1,0 +1,1034 @@
+[
+ {
+  "id": "orange_two_piece_feminine",
+  "title": "Orange Two-Piece",
+  "category": "Feminine",
+  "thumb": "https://cdn.perfectcorp.com/cms/5c9cd256-d4d2-418b-a6f4-0c022eff9c44/1773799030057/file.jpg",
+  "hex": "#f7994e",
+  "share": 0.34
+ },
+ {
+  "id": "bold_high_low_feminine",
+  "title": "Bold High-Low",
+  "category": "Feminine",
+  "thumb": "https://cdn.perfectcorp.com/cms/27c81cb4-10b2-4a76-8cdb-8922085f1c07/1773798977121/file.jpg",
+  "hex": "#2594ac",
+  "share": 0.37
+ },
+ {
+  "id": "denim_duo_feminine",
+  "title": "Denim Duo",
+  "category": "Feminine",
+  "thumb": "https://cdn.perfectcorp.com/cms/22430745-8811-4292-ac6d-5c1218040b79/1773798942214/file.jpg",
+  "hex": "#263048",
+  "share": 0.32
+ },
+ {
+  "id": "lounge_mode_feminine",
+  "title": "Lounge Mode",
+  "category": "Feminine",
+  "thumb": "https://cdn.perfectcorp.com/cms/5b443fbe-c43b-4920-b747-629ba4143c66/1773798908472/file.jpg",
+  "hex": "#a07764",
+  "share": 0.34
+ },
+ {
+  "id": "flowy_black_dress_feminine",
+  "title": "Flowy Black Dress",
+  "category": "Feminine",
+  "thumb": "https://cdn.perfectcorp.com/cms/dde157f1-6585-44e2-93c1-621042286366/1773798871609/file.jpg",
+  "hex": "#272c29",
+  "share": 0.3
+ },
+ {
+  "id": "snowfall_street_feminine",
+  "title": "Snowfall Street",
+  "category": "Feminine",
+  "thumb": "https://cdn.perfectcorp.com/cms/cf0cb263-6f08-4817-b5c8-eff75743e3ca/1773798839100/file.jpg",
+  "hex": "#e2d6c8",
+  "share": 0.27
+ },
+ {
+  "id": "silk_eclipse_feminine",
+  "title": "Silk Eclipse",
+  "category": "Feminine",
+  "thumb": "https://cdn.perfectcorp.com/cms/0fe9dffb-4e08-486d-a2fc-ba8c3ce5138d/1773798715353/file.jpg",
+  "hex": "#ebded7",
+  "share": 0.31
+ },
+ {
+  "id": "city_maverick_feminine",
+  "title": "City Maverick",
+  "category": "Feminine",
+  "thumb": "https://cdn.perfectcorp.com/cms/3b4f5e3a-8aef-46ee-a324-ffbb1c82a979/1773798638284/file.jpg",
+  "hex": "#2c3536",
+  "share": 0.36
+ },
+ {
+  "id": "arctic_chic_feminine",
+  "title": "Arctic Chic",
+  "category": "Feminine",
+  "thumb": "https://cdn.perfectcorp.com/cms/36dff7c0-c4fe-4ad4-a48b-ee64b4b059ae/1773798514148/file.jpg",
+  "hex": "#e4dbcc",
+  "share": 0.33
+ },
+ {
+  "id": "high_neck_lace_feminine",
+  "title": "High-Neck Lace",
+  "category": "Feminine",
+  "thumb": "https://cdn.perfectcorp.com/cms/9eca2415-ec2b-48fe-be6e-ddbcde58482b/1773798571116/file.jpg",
+  "hex": "#e4bfad",
+  "share": 0.33
+ },
+ {
+  "id": "coral_palm_set_feminine_summer",
+  "title": "Coral Palm Set",
+  "category": "Summer",
+  "thumb": "https://cdn.perfectcorp.com/cms/d5e3b6aa-8afd-4887-b7ce-ce4996d78ced/1778211212630/file.jpg",
+  "hex": "#dfbfb4",
+  "share": 0.28
+ },
+ {
+  "id": "boho_lace_jumper_feminine_summer",
+  "title": "Boho Lace Jumper",
+  "category": "Summer",
+  "thumb": "https://cdn.perfectcorp.com/cms/7e063903-320c-4be1-9ca8-9c3038700f14/1778218738162/file.jpg",
+  "hex": "#c4ac9c",
+  "share": 0.29
+ },
+ {
+  "id": "striped_summer_feminine_summer",
+  "title": "Striped Summer",
+  "category": "Summer",
+  "thumb": "https://cdn.perfectcorp.com/cms/a97e35a3-4a67-4560-9b48-33337deefc14/1778212272966/file.jpg",
+  "hex": "#b5b5c6",
+  "share": 0.32
+ },
+ {
+  "id": "lace_floral_feminine_summer",
+  "title": "Lace & Floral",
+  "category": "Summer",
+  "thumb": "https://cdn.perfectcorp.com/cms/c7ef9b72-f914-4a58-9003-8938358b9829/1778207134041/file.jpg",
+  "hex": "#9d8f91",
+  "share": 0.27
+ },
+ {
+  "id": "tropical_maxi_feminine_summer",
+  "title": "Tropical Maxi",
+  "category": "Summer",
+  "thumb": "https://cdn.perfectcorp.com/cms/b76be170-f7cd-447d-bd7a-9aa9d2b606a1/1778209843890/file.jpg",
+  "hex": "#ba8c63",
+  "share": 0.29
+ },
+ {
+  "id": "blue_gold_bindalli_feminine_cultural_attire",
+  "title": "Blue Gold Bindalli",
+  "category": "Cultural Attire",
+  "thumb": "https://cdn.perfectcorp.com/cms/2c4ae69d-79d9-4420-a05a-e86d4d255e99/1777357529863/file.png",
+  "hex": "#20223a",
+  "share": 0.29
+ },
+ {
+  "id": "plaid_tradition_feminine_cultural_attire",
+  "title": "Plaid Tradition",
+  "category": "Cultural Attire",
+  "thumb": "https://cdn.perfectcorp.com/cms/ed08dc07-699b-4b74-b2fe-b7703317e104/1776244307433/file.png",
+  "hex": "#463538",
+  "share": 0.32
+ },
+ {
+  "id": "red_kimono_feminine_cultural_attire",
+  "title": "Red Kimono",
+  "category": "Cultural Attire",
+  "thumb": "https://cdn.perfectcorp.com/cms/107615a6-5d9a-40ed-a758-040827c58a73/1777357585122/file.jpg",
+  "hex": "#b47157",
+  "share": 0.27
+ },
+ {
+  "id": "floral_hanbok_feminine_cultural_attire",
+  "title": "Floral Hanbok",
+  "category": "Cultural Attire",
+  "thumb": "https://cdn.perfectcorp.com/cms/aec8f11f-8455-4f8a-aead-fe0fef1ff7cf/1777358147366/file.jpg",
+  "hex": "#89173a",
+  "share": 0.31
+ },
+ {
+  "id": "elegant_saree_feminine_cultural_attire",
+  "title": "Elegant Saree",
+  "category": "Cultural Attire",
+  "thumb": "https://cdn.perfectcorp.com/cms/248ec056-2c96-44b9-bcc3-30ac52d7af86/1776334351679/file.jpg",
+  "hex": "#561212",
+  "share": 0.26
+ },
+ {
+  "id": "fiesta_floral_feminine_cultural_attire",
+  "title": "Fiesta Floral",
+  "category": "Cultural Attire",
+  "thumb": "https://cdn.perfectcorp.com/cms/6222474b-f114-4f17-97eb-d4a63a89953c/1776334165104/file.jpg",
+  "hex": "#c43a1b",
+  "share": 0.26
+ },
+ {
+  "id": "floral_folk_feminine_cultural_attire",
+  "title": "Floral Folk",
+  "category": "Cultural Attire",
+  "thumb": "https://cdn.perfectcorp.com/cms/56a2c681-ea08-498a-a9c1-53b9e2179f8b/1776244566567/file.png",
+  "hex": "#101516",
+  "share": 0.39
+ },
+ {
+  "id": "peacock_majesty_feminine_modern",
+  "title": "Peacock Majesty",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/5139a979-cf15-4ed7-b554-c93e93e92288/1774603392732/file.jpg",
+  "hex": "#49554a",
+  "share": 0.29
+ },
+ {
+  "id": "monochrome_swan_feminine_modern",
+  "title": "Monochrome Swan",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/df79ce95-7f69-4ec2-8aec-169f47809f5f/1774603644626/file.jpg",
+  "hex": "#1e1d1c",
+  "share": 0.27
+ },
+ {
+  "id": "gilded_onyx_feminine_modern",
+  "title": "Gilded Onyx",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/4c6ea471-c456-4abd-aeea-33aab36888e6/1774603035511/file.jpg",
+  "hex": "#1a1a1a",
+  "share": 0.43
+ },
+ {
+  "id": "golden_luxe_feminine_modern",
+  "title": "Golden Luxe",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/e7af1597-9ee6-46e0-9dd9-c87c0ced13e1/1774602410777/file.jpg",
+  "hex": "#b3987a",
+  "share": 0.35
+ },
+ {
+  "id": "crystal_radiance_feminine_wedding",
+  "title": "Crystal Radiance",
+  "category": "Wedding",
+  "thumb": "https://cdn.perfectcorp.com/cms/3520d991-fed4-4b60-b022-3a0ab02e3d41/1774601401219/file.jpg",
+  "hex": "#d6d6d4",
+  "share": 0.29
+ },
+ {
+  "id": "royal_peony_feminine_modern",
+  "title": "Royal Peony",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/64a6b089-1584-4cc2-ac9a-f6e027dab228/1774600843066/file.jpg",
+  "hex": "#d0a5a0",
+  "share": 0.31
+ },
+ {
+  "id": "ruby_shimmer_feminine_modern",
+  "title": "Ruby Shimmer",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/4ffd54fc-478b-4e84-a782-3a352dbaf6be/1774600568453/file.jpg",
+  "hex": "#5b2f31",
+  "share": 0.3
+ },
+ {
+  "id": "midnight_fringe_feminine_modern",
+  "title": "Midnight Fringe",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/759605fe-0e89-4e28-a6ab-1969c420ebb6/1774603785531/file.jpg",
+  "hex": "#2d2b31",
+  "share": 0.33
+ },
+ {
+  "id": "sunshine_muse_feminine_summer",
+  "title": "Sunshine Muse",
+  "category": "Summer",
+  "thumb": "https://cdn.perfectcorp.com/cms/b25f027b-9aec-464f-9a7a-b18a8f08bcc7/1774958122153/file.png",
+  "hex": "#dacda6",
+  "share": 0.32
+ },
+ {
+  "id": "wildflower_soul_feminine_summer",
+  "title": "Wildflower Soul",
+  "category": "Summer",
+  "thumb": "https://cdn.perfectcorp.com/cms/9630c14e-2316-42e6-bac5-2dcf07b5c45e/1774958092482/file.jpg",
+  "hex": "#7a8593",
+  "share": 0.3
+ },
+ {
+  "id": "courtside_club_feminine_summer",
+  "title": "Courtside Club",
+  "category": "Summer",
+  "thumb": "https://cdn.perfectcorp.com/cms/118c48c0-778f-418f-8fa7-41d74b8ef880/1774842950164/file.jpg",
+  "hex": "#616f7d",
+  "share": 0.33
+ },
+ {
+  "id": "flower_gala_feminine_summer",
+  "title": "Flower Gala",
+  "category": "Summer",
+  "thumb": "https://cdn.perfectcorp.com/cms/ce3e180a-14f2-4375-9a7a-0854e48ff655/1774836361242/file.png",
+  "hex": "#e0dbd5",
+  "share": 0.3
+ },
+ {
+  "id": "tailored_edge_feminine_summer",
+  "title": "Tailored Edge",
+  "category": "Summer",
+  "thumb": "https://cdn.perfectcorp.com/cms/fc9f0c43-6144-40ba-a74d-aed763b3c3e0/1774836321778/file.jpg",
+  "hex": "#99a2b2",
+  "share": 0.29
+ },
+ {
+  "id": "minimalist_chic_feminine_summer",
+  "title": "Minimalist Chic",
+  "category": "Summer",
+  "thumb": "https://cdn.perfectcorp.com/cms/8f93aa20-71dd-471b-bac6-fa9fed7190be/1775548726853/file.jpg",
+  "hex": "#d2d7d9",
+  "share": 0.28
+ },
+ {
+  "id": "cloud_ruffle_feminine_wedding",
+  "title": "Cloud Ruffle",
+  "category": "Wedding",
+  "thumb": "https://cdn.perfectcorp.com/cms/461cb2f4-b681-4642-8f2b-73a7082052e8/1770623586239/file.jpg",
+  "hex": "#d6d6d6",
+  "share": 0.34
+ },
+ {
+  "id": "high_neck_lace_feminine_wedding",
+  "title": "High-Neck Lace",
+  "category": "Wedding",
+  "thumb": "https://cdn.perfectcorp.com/cms/d2569066-7953-4c90-95de-694bdc79e461/1770622192773/file.jpg",
+  "hex": "#bcb4b2",
+  "share": 0.31
+ },
+ {
+  "id": "off_shoulder_satin_feminine_wedding",
+  "title": "Off-Shoulder Satin",
+  "category": "Wedding",
+  "thumb": "https://cdn.perfectcorp.com/cms/bfe5899e-4421-49b9-8d1d-de94e408b1ed/1770621771413/file.jpg",
+  "hex": "#dcd7d5",
+  "share": 0.29
+ },
+ {
+  "id": "pink_tulle_mini_feminine_modern",
+  "title": "Pink Tulle Mini",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/b25375f2-dffa-451e-b0db-949edb87f4ce/1768285577566/file.jpg",
+  "hex": "#e9c5d3",
+  "share": 0.31
+ },
+ {
+  "id": "coquette_bow_knit_feminine_modern",
+  "title": "Coquette Bow Knit",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/2494a6a1-b1bd-4016-a298-4e57e3783396/1768285526583/file.jpg",
+  "hex": "#a51a31",
+  "share": 0.37
+ },
+ {
+  "id": "glitter_glam_gown_feminine_modern",
+  "title": "Glitter Glam Gown",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/e761f5ca-c9ca-4588-9e83-98b010b2cfde/1768285552757/file.jpg",
+  "hex": "#ccac9e",
+  "share": 0.3
+ },
+ {
+  "id": "city_maverick_feminine_edgy",
+  "title": "City Maverick",
+  "category": "Edgy",
+  "thumb": "https://cdn.perfectcorp.com/cms/8459f978-0962-4f1c-bea5-13fa805d3bfb/1765187405304/file.jpg",
+  "hex": "#212020",
+  "share": 0.38
+ },
+ {
+  "id": "chestnut_charm_feminine_edgy",
+  "title": "Chestnut Charm",
+  "category": "Edgy",
+  "thumb": "https://cdn.perfectcorp.com/cms/d5807cf4-222f-463c-97a1-3b560240206e/1765187362042/file.jpg",
+  "hex": "#442c1f",
+  "share": 0.34
+ },
+ {
+  "id": "firestarter_feminine_holiday",
+  "title": "Firestarter",
+  "category": "Holiday",
+  "thumb": "https://cdn.perfectcorp.com/cms/d50930bf-e238-4ca6-bd9b-b1ba3f5c775f/1763430605258/file.jpg",
+  "hex": "#910103",
+  "share": 0.31
+ },
+ {
+  "id": "electric_grace_feminine_holiday",
+  "title": "Electric Grace",
+  "category": "Holiday",
+  "thumb": "https://cdn.perfectcorp.com/cms/be644fd1-b50d-436d-a6e9-e28de423359a/1763430751317/file.jpg",
+  "hex": "#000000",
+  "share": 0.38
+ },
+ {
+  "id": "goldrush_feminine_holiday",
+  "title": "Goldrush",
+  "category": "Holiday",
+  "thumb": "https://cdn.perfectcorp.com/cms/a1360145-aeb7-4eeb-a7b2-15e46c8a1433/1763430794718/file.jpg",
+  "hex": "#90765a",
+  "share": 0.28
+ },
+ {
+  "id": "power_play_feminine_holiday",
+  "title": "Power Play",
+  "category": "Holiday",
+  "thumb": "https://cdn.perfectcorp.com/cms/4213ce4b-4c66-430e-98c7-3dc822311e7e/1763430832812/file.jpg",
+  "hex": "#020101",
+  "share": 0.31
+ },
+ {
+  "id": "silk_eclipse_feminine_holiday",
+  "title": "Silk Eclipse",
+  "category": "Holiday",
+  "thumb": "https://cdn.perfectcorp.com/cms/3e0b632c-1fb6-4936-8902-dd6989e01c13/1763430890693/file.jpg",
+  "hex": "#c2a28e",
+  "share": 0.28
+ },
+ {
+  "id": "electric_breeze_feminine_everyday",
+  "title": "Electric Breeze",
+  "category": "Everyday",
+  "thumb": "https://cdn.perfectcorp.com/cms/20fc2996-8af4-4a3a-bd6e-80088c002ee3/1763520590632/file.png",
+  "hex": "#414176",
+  "share": 0.33
+ },
+ {
+  "id": "strawberry_soda_feminine_everyday",
+  "title": "Strawberry Soda",
+  "category": "Everyday",
+  "thumb": "https://cdn.perfectcorp.com/cms/3a4ea61d-0586-4e3b-9585-0cef38ed14bb/1763521387161/file.png",
+  "hex": "#c0d0d2",
+  "share": 0.28
+ },
+ {
+  "id": "science_club_feminine_everyday",
+  "title": "Science Club",
+  "category": "Everyday",
+  "thumb": "https://cdn.perfectcorp.com/cms/fa807030-280d-4c51-8f6d-386a9a8b85ea/1763522612143/file.jpg",
+  "hex": "#527c9c",
+  "share": 0.43
+ },
+ {
+  "id": "vinyl_muse_feminine_everyday",
+  "title": "Vinyl Muse",
+  "category": "Everyday",
+  "thumb": "https://cdn.perfectcorp.com/cms/fda092f6-8c9e-41e2-9b14-980ed47fa5fe/1763522654800/file.jpg",
+  "hex": "#274968",
+  "share": 0.45
+ },
+ {
+  "id": "winter_waltz_feminine_holiday",
+  "title": "Winter Waltz",
+  "category": "Holiday",
+  "thumb": "https://cdn.perfectcorp.com/cms/ca58d8bb-3a2f-49b2-8358-4b335f856fc4/1763431213448/file.jpg",
+  "hex": "#880c0e",
+  "share": 0.34
+ },
+ {
+  "id": "snowfall_street_feminine_holiday",
+  "title": "Snowfall Street",
+  "category": "Holiday",
+  "thumb": "https://cdn.perfectcorp.com/cms/a7bce98d-6158-4ab2-8423-d15ffa8f0505/1763431260787/file.jpg",
+  "hex": "#cfc2b6",
+  "share": 0.27
+ },
+ {
+  "id": "candy_cane_lane_feminine_holiday",
+  "title": "Candy Cane Lane",
+  "category": "Holiday",
+  "thumb": "https://cdn.perfectcorp.com/cms/eec00278-b8d0-49d7-a7c6-d955012b2132/1763431303493/file.jpg",
+  "hex": "#6f0e13",
+  "share": 0.42
+ },
+ {
+  "id": "tartan_crush_feminine_holiday",
+  "title": "Tartan Crush",
+  "category": "Holiday",
+  "thumb": "https://cdn.perfectcorp.com/cms/7339aab1-6d7d-4c6e-870d-3a6c3a292fe5/1763431511709/file.jpg",
+  "hex": "#4a412d",
+  "share": 0.34
+ },
+ {
+  "id": "midnight_mistletoe_feminine_holiday",
+  "title": "Midnight Mistletoe",
+  "category": "Holiday",
+  "thumb": "https://cdn.perfectcorp.com/cms/03b39d52-644c-43e8-8c88-070c34a35ef3/1763431556624/file.jpg",
+  "hex": "#a60001",
+  "share": 0.38
+ },
+ {
+  "id": "citrus_pop_mini_feminine_summer",
+  "title": "Citrus Pop Mini",
+  "category": "Summer",
+  "thumb": "https://cdn.perfectcorp.com/cms/24ca94b9-8b8a-47ea-8f32-7c2c6817528d/1757920003433/file.jpg",
+  "hex": "#ed5e1c",
+  "share": 0.32
+ },
+ {
+  "id": "oat_cream_set_feminine_modern",
+  "title": "Oat Cream Set",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/d3b33478-e2af-412a-ab25-37f5d299d1a2/1757920040046/file.jpg",
+  "hex": "#d5c9c2",
+  "share": 0.33
+ },
+ {
+  "id": "ocean_twist_mini_feminine_summer",
+  "title": "Ocean Twist Mini",
+  "category": "Summer",
+  "thumb": "https://cdn.perfectcorp.com/cms/9bddfb22-6bdf-4fb1-b37e-e90be11519ea/1757920081095/file.jpg",
+  "hex": "#dfd0ca",
+  "share": 0.32
+ },
+ {
+  "id": "pink_samba_maxi_feminine_summer",
+  "title": "Pink Samba Maxi",
+  "category": "Summer",
+  "thumb": "https://cdn.perfectcorp.com/cms/e673c928-5abf-4c91-93f0-954cf8844c9d/1757920115155/file.jpg",
+  "hex": "#e1b3af",
+  "share": 0.27
+ },
+ {
+  "id": "navy_beige_dirndl_feminine_cultural_attire",
+  "title": "Navy-Beige Dirndl",
+  "category": "Cultural Attire",
+  "thumb": "https://cdn.perfectcorp.com/cms/276a21a0-9307-4a17-9599-c09481796a83/1757923585119/file.jpg",
+  "hex": "#1f2432",
+  "share": 0.29
+ },
+ {
+  "id": "darkly_draped_feminine_edgy",
+  "title": "Darkly Draped",
+  "category": "Edgy",
+  "thumb": "https://cdn.perfectcorp.com/cms/ae835b23-0c9a-4327-8831-de5a31fded0f/1757577000331/file.jpg",
+  "hex": "#232322",
+  "share": 0.39
+ },
+ {
+  "id": "midnight_collar_feminine_edgy",
+  "title": "Midnight Collar",
+  "category": "Edgy",
+  "thumb": "https://cdn.perfectcorp.com/cms/1d10cafb-fa12-4c40-b02f-7f5756c06f89/1757577054284/file.jpg",
+  "hex": "#1a1a15",
+  "share": 0.47
+ },
+ {
+  "id": "tailored_trouble_feminine_edgy",
+  "title": "Tailored Trouble",
+  "category": "Edgy",
+  "thumb": "https://cdn.perfectcorp.com/cms/89e269ee-5d3c-4c49-ac15-d7555b025eb2/1757577320877/file.jpg",
+  "hex": "#292927",
+  "share": 0.35
+ },
+ {
+  "id": "night_shift_feminine_edgy",
+  "title": "Night Shift",
+  "category": "Edgy",
+  "thumb": "https://cdn.perfectcorp.com/cms/92441f73-9dfa-4e32-92b9-5786dd14ef05/1757577377209/file.jpg",
+  "hex": "#1c1d18",
+  "share": 0.34
+ },
+ {
+  "id": "ghostly_lace_feminine_edgy",
+  "title": "Ghostly Lace",
+  "category": "Edgy",
+  "thumb": "https://cdn.perfectcorp.com/cms/06d06b48-88f2-4c55-aee9-ea2db1bdc4d6/1757577523481/file.jpg",
+  "hex": "#151511",
+  "share": 0.43
+ },
+ {
+  "id": "noir_ribbon_feminine_edgy",
+  "title": "Noir Ribbon",
+  "category": "Edgy",
+  "thumb": "https://cdn.perfectcorp.com/cms/78baa988-b446-4e7c-9d00-76b6eb42e89b/1757577572713/file.jpg",
+  "hex": "#201e1b",
+  "share": 0.33
+ },
+ {
+  "id": "picnic_pop_mini_feminine_summer",
+  "title": "Picnic Pop Mini",
+  "category": "Summer",
+  "thumb": "https://cdn.perfectcorp.com/cms/9f91eae6-ccd1-42dd-a47f-2a303210e719/1757918911751/file.png",
+  "hex": "#a12f52",
+  "share": 0.31
+ },
+ {
+  "id": "tangerine_twist_feminine_summer",
+  "title": "Tangerine Twist",
+  "category": "Summer",
+  "thumb": "https://cdn.perfectcorp.com/cms/79462a4f-2033-4080-a7a4-69f0a3265ff1/1757918608827/file.jpg",
+  "hex": "#ca701b",
+  "share": 0.32
+ },
+ {
+  "id": "lemon_garden_feminine_summer",
+  "title": "Lemon Garden",
+  "category": "Summer",
+  "thumb": "https://cdn.perfectcorp.com/cms/b55d9243-9e4a-4500-9cfb-e50ae9247d5a/1757918650692/file.jpg",
+  "hex": "#aabdd8",
+  "share": 0.31
+ },
+ {
+  "id": "cotton_candy_mini_feminine_summer",
+  "title": "Cotton Candy Mini",
+  "category": "Summer",
+  "thumb": "https://cdn.perfectcorp.com/cms/24ce9bdb-0a5c-47df-827f-d9fecab5131b/1757918883657/file.jpg",
+  "hex": "#e2b0b8",
+  "share": 0.3
+ },
+ {
+  "id": "cherry_tile_midi_feminine_summer",
+  "title": "Cherry Tile Midi",
+  "category": "Summer",
+  "thumb": "https://cdn.perfectcorp.com/cms/69b550df-949c-4bfd-a7e4-699be32c6635/1757918991776/file.jpg",
+  "hex": "#cb7b87",
+  "share": 0.28
+ },
+ {
+  "id": "sunbud_romper_feminine_summer",
+  "title": "Sunbud Romper",
+  "category": "Summer",
+  "thumb": "https://cdn.perfectcorp.com/cms/d70c65b5-16b5-48dd-93a7-1cfec8ecc69c/1757918953122/file.jpg",
+  "hex": "#bb9f89",
+  "share": 0.27
+ },
+ {
+  "id": "blue_breeze_feminine_summer",
+  "title": "Blue Breeze",
+  "category": "Summer",
+  "thumb": "https://cdn.perfectcorp.com/cms/f0831f89-13ee-4aba-87f1-a150ed8d5e48/1757918784783/file.jpg",
+  "hex": "#0e256b",
+  "share": 0.27
+ },
+ {
+  "id": "terracotta_sky_feminine_summer",
+  "title": "Terracotta Sky",
+  "category": "Summer",
+  "thumb": "https://cdn.perfectcorp.com/cms/696e4e10-35e7-445a-926d-eb868d217bfa/1757918742024/file.png",
+  "hex": "#bf5725",
+  "share": 0.33
+ },
+ {
+  "id": "white_shirt_feminine_everyday",
+  "title": "White Shirt",
+  "category": "Everyday",
+  "thumb": "https://cdn.perfectcorp.com/cms/b7736142-e2ac-4247-a3a8-c13c03be5273/1758012224489/file.png",
+  "hex": "#bcb9bb",
+  "share": 0.29
+ },
+ {
+  "id": "yellow_knit_tee_feminine_everyday",
+  "title": "Yellow Knit Tee",
+  "category": "Everyday",
+  "thumb": "https://cdn.perfectcorp.com/cms/6ab7d500-8c7d-414e-ac23-4fc7388e0378/1758012283091/file.png",
+  "hex": "#e9ce9c",
+  "share": 0.32
+ },
+ {
+  "id": "off_shoulder_black_feminine_everyday",
+  "title": "Off-Shoulder Black",
+  "category": "Everyday",
+  "thumb": "https://cdn.perfectcorp.com/cms/2496a4bc-5a66-49eb-816a-5937b6e8351b/1758012409423/file.jpg",
+  "hex": "#1b1617",
+  "share": 0.31
+ },
+ {
+  "id": "brown_moto_chic_feminine_edgy",
+  "title": "Brown Moto Chic",
+  "category": "Edgy",
+  "thumb": "https://cdn.perfectcorp.com/cms/d80e2982-1486-4fc2-8120-8502a172af9f/1758012454778/file.jpg",
+  "hex": "#4f403b",
+  "share": 0.32
+ },
+ {
+  "id": "strapless_peplum_top_feminine_modern",
+  "title": "Strapless Peplum Top",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/77cd9f91-34ea-44c2-873e-3481961d82be/1758012537711/file.jpg",
+  "hex": "#222222",
+  "share": 0.4
+ },
+ {
+  "id": "shiny_metallic_shirt_feminine_edgy",
+  "title": "Shiny Metallic Shirt",
+  "category": "Edgy",
+  "thumb": "https://cdn.perfectcorp.com/cms/d3f51253-1dd8-476f-8520-3d9fef7716c6/1758012581066/file.jpg",
+  "hex": "#838ca4",
+  "share": 0.38
+ },
+ {
+  "id": "argyle_sweater_feminine_everyday",
+  "title": "Argyle Sweater",
+  "category": "Everyday",
+  "thumb": "https://cdn.perfectcorp.com/cms/abc97e26-2ab4-4bc9-b276-11028dbaeb97/1758012618556/file.jpg",
+  "hex": "#1b161b",
+  "share": 0.35
+ },
+ {
+  "id": "alpine_red_dirndl_feminine_cultural_attire",
+  "title": "Alpine Red Dirndl",
+  "category": "Cultural Attire",
+  "thumb": "https://cdn.perfectcorp.com/cms/7cdd256d-aba7-4bdf-9908-e4b52702cdb0/1757923659893/file.png",
+  "hex": "#020f11",
+  "share": 0.36
+ },
+ {
+  "id": "tropical_golf_set_feminine_modern",
+  "title": "Tropical Golf Set",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/bea61c62-c615-43df-8385-f514f31e7dd2/1757924445122/file.png",
+  "hex": "#d0cfcf",
+  "share": 0.35
+ },
+ {
+  "id": "blue_floral_qipao_feminine_modern",
+  "title": "Blue Floral Qipao",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/29c8d24f-c6c0-4f40-940f-566ff9f1f260/1757923709154/file.png",
+  "hex": "#d3d1d0",
+  "share": 0.27
+ },
+ {
+  "id": "embroidered_dress_feminine_modern",
+  "title": "Embroidered Dress",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/56c6a016-2995-448f-a10f-fd67fbe50b61/1757923750794/file.png",
+  "hex": "#73181a",
+  "share": 0.3
+ },
+ {
+  "id": "thai_style_gown_feminine_cultural_attire",
+  "title": "Thai-Style Gown",
+  "category": "Cultural Attire",
+  "thumb": "https://cdn.perfectcorp.com/cms/348c0977-a7d4-426e-a413-b6ec64db9e20/1757924485285/file.jpg",
+  "hex": "#ae7875",
+  "share": 0.34
+ },
+ {
+  "id": "beige_floral_qipao_feminine_cultural_attire",
+  "title": "Beige Floral Qipao",
+  "category": "Cultural Attire",
+  "thumb": "https://cdn.perfectcorp.com/cms/d40bb554-436a-451d-917a-259feb5b1e30/1757924547722/file.jpg",
+  "hex": "#dbc6b2",
+  "share": 0.3
+ },
+ {
+  "id": "boho_dress_feminine_modern",
+  "title": "Boho Dress",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/4fd2aac6-22db-40f9-aa7d-883f65adaa5d/1758009543207/file.jpg",
+  "hex": "#c5896a",
+  "share": 0.28
+ },
+ {
+  "id": "citrus_puff_dress_feminine_summer",
+  "title": "Citrus Puff Dress",
+  "category": "Summer",
+  "thumb": "https://cdn.perfectcorp.com/cms/8fcae375-6a4d-4585-afb4-336c46c6f43f/1758009649425/file.png",
+  "hex": "#cfdf75",
+  "share": 0.31
+ },
+ {
+  "id": "mini_black_ballgown_feminine_modern",
+  "title": "Mini Black Ballgown",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/dca43fa1-a3a9-4c59-a49d-021f3e9e88a3/1758009735754/file.png",
+  "hex": "#20262b",
+  "share": 0.4
+ },
+ {
+  "id": "navy_gala_gown_feminine_modern",
+  "title": "Navy Gala Gown",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/bebd774e-6635-48b6-a78b-b29325d0051d/1758009798103/file.png",
+  "hex": "#32688e",
+  "share": 0.32
+ },
+ {
+  "id": "mint_midi_tulle_feminine_summer",
+  "title": "Mint Midi Tulle",
+  "category": "Summer",
+  "thumb": "https://cdn.perfectcorp.com/cms/44fcc71d-cf6d-4920-8436-88d2173f5e30/1758009850271/file.jpg",
+  "hex": "#8ead88",
+  "share": 0.29
+ },
+ {
+  "id": "yellow_blossom_dress_feminine_summer",
+  "title": "Yellow Blossom Dress",
+  "category": "Summer",
+  "thumb": "https://cdn.perfectcorp.com/cms/79538fce-d8ba-4cbf-87b4-fea0faf96731/1758009899420/file.jpg",
+  "hex": "#e0bd88",
+  "share": 0.29
+ },
+ {
+  "id": "shiny_silver_gown_feminine_modern",
+  "title": "Shiny Silver Gown",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/c6881080-2d9d-4e2e-b608-6994d1602a38/1758010050804/file.png",
+  "hex": "#85796d",
+  "share": 0.37
+ },
+ {
+  "id": "orange_two_piece_feminine_modern",
+  "title": "Orange Two-Piece",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/ecad56c6-dc27-4bed-a3f7-0a3037e3e57f/1758010129193/file.jpg",
+  "hex": "#cd6c29",
+  "share": 0.37
+ },
+ {
+  "id": "red_elegant_jumpsuit_feminine_modern",
+  "title": "Red Elegant Jumpsuit",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/717c07df-a4f9-4199-b6c4-5d4ee5d6e19a/1758010177651/file.jpg",
+  "hex": "#c10015",
+  "share": 0.33
+ },
+ {
+  "id": "strapless_gold_dress_feminine_modern",
+  "title": "Strapless Gold Dress",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/774df440-1778-4b6e-a6f7-048a9beb3fd8/1758010228365/file.jpg",
+  "hex": "#bd7a0b",
+  "share": 0.29
+ },
+ {
+  "id": "bold_high_low_feminine_modern",
+  "title": "Bold High-Low",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/45d95789-ee6b-4363-9a33-ea6751eb0e0b/1758010273438/file.jpg",
+  "hex": "#1f7897",
+  "share": 0.36
+ },
+ {
+  "id": "pleated_green_dress_feminine_modern",
+  "title": "Pleated Green Dress",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/5e8be0db-2ad6-4643-b234-564105f8c033/1758010313203/file.jpg",
+  "hex": "#1f756c",
+  "share": 0.31
+ },
+ {
+  "id": "chic_collar_feminine_edgy",
+  "title": "Chic Collar",
+  "category": "Edgy",
+  "thumb": "https://cdn.perfectcorp.com/cms/19a64e91-dbd3-4633-a8f2-243f7821f057/1758010355435/file.jpg",
+  "hex": "#1e1d13",
+  "share": 0.36
+ },
+ {
+  "id": "denim_shirt_dress_feminine_everyday",
+  "title": "Denim Shirt Dress",
+  "category": "Everyday",
+  "thumb": "https://cdn.perfectcorp.com/cms/f395bd61-d40b-4eda-a7a3-7af8bf126924/1758010406821/file.jpg",
+  "hex": "#5a677c",
+  "share": 0.3
+ },
+ {
+  "id": "flowy_black_dress_feminine_modern",
+  "title": "Flowy Black Dress",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/aa916022-6565-40be-9ec3-d83cc90ab4bd/1758010448683/file.jpg",
+  "hex": "#1c1d14",
+  "share": 0.35
+ },
+ {
+  "id": "red_babydoll_dress_feminine_modern",
+  "title": "Red Babydoll Dress",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/80f0db11-3856-49cd-8db6-91eb82165c0b/1758010527935/file.jpg",
+  "hex": "#db2227",
+  "share": 0.39
+ },
+ {
+  "id": "denim_duo_feminine_modern",
+  "title": "Denim Duo",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/b8007849-d1f9-46f3-85c1-8ecb57f64b58/1758010567643/file.jpg",
+  "hex": "#1f1f2b",
+  "share": 0.34
+ },
+ {
+  "id": "ruffle_wrap_dress_feminine_modern",
+  "title": "Ruffle Wrap Dress",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/4debe2b1-c35d-4a2e-b4e4-e8896950143e/1758010609318/file.jpg",
+  "hex": "#921a1b",
+  "share": 0.36
+ },
+ {
+  "id": "tweed_m_lange_feminine_modern",
+  "title": "Tweed M\u00e9lange",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/e3f409ae-c8e1-457a-8ce2-058a4af46478/1758010711678/file.png",
+  "hex": "#9e8884",
+  "share": 0.3
+ },
+ {
+  "id": "floral_maxi_dress_feminine_summer",
+  "title": "Floral Maxi Dress",
+  "category": "Summer",
+  "thumb": "https://cdn.perfectcorp.com/cms/1d409292-da1e-4e03-9b06-98dd0c655f23/1758010793987/file.jpg",
+  "hex": "#dfb9b0",
+  "share": 0.29
+ },
+ {
+  "id": "mini_strapless_dress_feminine_summer",
+  "title": "Mini Strapless Dress",
+  "category": "Summer",
+  "thumb": "https://cdn.perfectcorp.com/cms/a413412b-b336-4468-b691-ea04c50756be/1758010837701/file.png",
+  "hex": "#b0c7dd",
+  "share": 0.3
+ },
+ {
+  "id": "mustard_midi_look_feminine_modern",
+  "title": "Mustard Midi Look",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/594f6b5b-f44a-4aba-ab39-498daaf17713/1758010882630/file.png",
+  "hex": "#d88d11",
+  "share": 0.35
+ },
+ {
+  "id": "gold_midi_dress_feminine_modern",
+  "title": "Gold Midi Dress",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/b1b8f59a-0dfa-4837-a5ac-75ae14cc05bc/1778233778002/file.jpg",
+  "hex": "#b99c8e",
+  "share": 0.3
+ },
+ {
+  "id": "blush_blue_feminine_modern",
+  "title": "Blush & Blue",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/63bfc789-deca-4137-92b3-9562acc48e4b/1758010977620/file.jpg",
+  "hex": "#d39d99",
+  "share": 0.31
+ },
+ {
+  "id": "sporty_chic_denim_feminine_summer",
+  "title": "Sporty Chic Denim",
+  "category": "Summer",
+  "thumb": "https://cdn.perfectcorp.com/cms/a37138b2-c885-45dc-b0bc-35fe18461d26/1761806787114/file.jpg",
+  "hex": "#a2b4c8",
+  "share": 0.29
+ },
+ {
+  "id": "schoolgirl_chic_feminine_everyday",
+  "title": "Schoolgirl Chic",
+  "category": "Everyday",
+  "thumb": "https://cdn.perfectcorp.com/cms/ef2f9b9f-485c-46b5-96c7-07e729c4df30/1758011071910/file.jpg",
+  "hex": "#232324",
+  "share": 0.31
+ },
+ {
+  "id": "white_ruffled_maxi_feminine_edgy",
+  "title": "White Ruffled Maxi",
+  "category": "Edgy",
+  "thumb": "https://cdn.perfectcorp.com/cms/9b4c7695-ac3b-479a-8af4-87243eb0c65f/1758011267248/file.jpg",
+  "hex": "#bdbbb2",
+  "share": 0.3
+ },
+ {
+  "id": "lounge_mode_feminine_everyday",
+  "title": "Lounge Mode",
+  "category": "Everyday",
+  "thumb": "https://cdn.perfectcorp.com/cms/18e69641-c7af-44ff-8b3c-c3bf3be7e125/1758011372399/file.png",
+  "hex": "#6a4e45",
+  "share": 0.32
+ },
+ {
+  "id": "evergreen_feminine_modern",
+  "title": "Evergreen",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/d7d93052-138d-4311-98f7-ad68fcada0e0/1758011417399/file.jpg",
+  "hex": "#9a9484",
+  "share": 0.31
+ },
+ {
+  "id": "black_gala_dress_feminine_modern",
+  "title": "Black Gala Dress",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/fdd92416-135a-497c-b9c1-26a688a94003/1761803630812/file.jpg",
+  "hex": "#1a181d",
+  "share": 0.37
+ },
+ {
+  "id": "edgy_black_gown_feminine_edgy",
+  "title": "Edgy Black Gown",
+  "category": "Edgy",
+  "thumb": "https://cdn.perfectcorp.com/cms/afaf1b9f-89b8-44f4-9839-4d2aa9a791cb/1758011496571/file.jpg",
+  "hex": "#29221a",
+  "share": 0.33
+ },
+ {
+  "id": "pink_puff_mini_dress_feminine_modern",
+  "title": "Pink Puff Mini Dress",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/6672dcad-6dd5-498b-bbe2-703b0dc73297/1758011538256/file.jpg",
+  "hex": "#e2ccce",
+  "share": 0.37
+ },
+ {
+  "id": "classic_preppy_look_feminine_everyday",
+  "title": "Classic Preppy Look",
+  "category": "Everyday",
+  "thumb": "https://cdn.perfectcorp.com/cms/f2e8b351-1e85-4b74-abb3-f183b5378e79/1758011580217/file.jpg",
+  "hex": "#43220e",
+  "share": 0.32
+ },
+ {
+  "id": "pink_tweed_feminine_modern",
+  "title": "Pink Tweed",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/08d4e79e-8025-438f-8b66-b5858b6ca24a/1758011658010/file.jpg",
+  "hex": "#e19fa8",
+  "share": 0.34
+ },
+ {
+  "id": "stellar_metallic_set_feminine_edgy",
+  "title": "Stellar Metallic Set",
+  "category": "Edgy",
+  "thumb": "https://cdn.perfectcorp.com/cms/608034c8-5fce-4bf3-975d-91d63a300247/1758011702869/file.jpg",
+  "hex": "#d3c9c7",
+  "share": 0.26
+ },
+ {
+  "id": "golden_glow_midi_feminine_modern",
+  "title": "Golden Glow Midi",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/5240a05b-4e7b-421b-a620-ca9106ba3311/1778233693136/file.jpg",
+  "hex": "#9c7450",
+  "share": 0.29
+ },
+ {
+  "id": "colorblock_pink_midi_feminine_summer",
+  "title": "Colorblock Pink Midi",
+  "category": "Summer",
+  "thumb": "https://cdn.perfectcorp.com/cms/28e9c5c1-c244-4f32-a79d-e80af3be4d8e/1758011863327/file.jpg",
+  "hex": "#e1b9be",
+  "share": 0.34
+ },
+ {
+  "id": "color_pop_feminine_summer",
+  "title": "Color Pop",
+  "category": "Summer",
+  "thumb": "https://cdn.perfectcorp.com/cms/d4a609e6-8407-442a-927e-551497ad5c94/1758011902255/file.jpg",
+  "hex": "#d7c3c6",
+  "share": 0.27
+ },
+ {
+  "id": "black_lace_dress_feminine_modern",
+  "title": "Black Lace Dress",
+  "category": "Modern",
+  "thumb": "https://cdn.perfectcorp.com/cms/eac6d783-d019-49b7-b3db-9749395e22be/1758011939523/file.jpg",
+  "hex": "#cbc3bb",
+  "share": 0.27
+ }
+]

@@ -1,0 +1,145 @@
+{
+ "skin": {
+  "status": 200,
+  "data": {
+   "error": null,
+   "results": {
+    "output": [
+     {
+      "ui_score": 79,
+      "raw_score": 87.9864364862442,
+      "type": "dark_circle_v2"
+     },
+     {
+      "ui_score": 84,
+      "raw_score": 88.39034271240234,
+      "type": "oiliness"
+     },
+     {
+      "ui_score": 99,
+      "raw_score": 100.0,
+      "type": "redness"
+     },
+     {
+      "ui_score": 98,
+      "raw_score": 98.99144470691681,
+      "type": "pore"
+     },
+     {
+      "ui_score": 92,
+      "raw_score": 95.35372853279114,
+      "type": "firmness"
+     },
+     {
+      "ui_score": 98,
+      "raw_score": 99.56062436103821,
+      "type": "texture"
+     },
+     {
+      "ui_score": 98,
+      "raw_score": 99.34041595458984,
+      "type": "age_spot"
+     },
+     {
+      "ui_score": 95,
+      "raw_score": 98.07506203651428,
+      "type": "wrinkle"
+     },
+     {
+      "ui_score": 93,
+      "raw_score": 95.9316611289978,
+      "type": "radiance"
+     },
+     {
+      "ui_score": 99,
+      "raw_score": 100.0,
+      "type": "acne"
+     },
+     {
+      "ui_score": 84,
+      "raw_score": 88.06952238082886,
+      "type": "moisture"
+     },
+     {
+      "type": "skin_type",
+      "region": "whole",
+      "skin_type": "Normal"
+     },
+     {
+      "type": "skin_type",
+      "region": "t_zone",
+      "skin_type": "Normal"
+     },
+     {
+      "type": "skin_type",
+      "region": "u_zone",
+      "skin_type": "Normal"
+     },
+     {
+      "score": 92.63636363636364,
+      "type": "all"
+     },
+     {
+      "score": 26,
+      "type": "skin_age"
+     },
+     {
+      "type": "resize_image"
+     }
+    ]
+   },
+   "task_status": "success"
+  }
+ },
+ "tone": {
+  "status": 200,
+  "data": {
+   "error": null,
+   "results": {
+    "color": {
+     "eye_color": "#402412",
+     "eye_color_name": "Brown",
+     "lip_color": "#cd847a",
+     "eyebrow_color": "#5b3f32",
+     "skin_color": "#bb9b84"
+    },
+    "face_quality": {
+     "has_face": true,
+     "area": "good",
+     "frontal": "good",
+     "lighting": "good",
+     "faceangle": "leftward"
+    }
+   },
+   "task_status": "success"
+  }
+ },
+ "face": {
+  "status": 200,
+  "data": {
+   "error": null,
+   "results": {
+    "nose": {},
+    "agegender": {},
+    "eyelid": {},
+    "eyebrow": {},
+    "color": {
+     "eye_color": "#402412",
+     "eye_color_name": "Brown",
+     "lip_color": "#cd847a"
+    },
+    "face_quality": {
+     "has_face": true,
+     "area": "good",
+     "frontal": "good",
+     "lighting": "good",
+     "faceangle": "leftward"
+    },
+    "cheekbone": {},
+    "faceshape": "Square",
+    "facialratio": {}
+   },
+   "task_status": "success"
+  }
+ }
+}

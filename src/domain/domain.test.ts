@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import { CAST } from './cast';
-import { skinStory, NUTRIENTS } from './care';
+import { amountFor, foodsFor, NUTRIENTS, skinStory, type Lifestyle } from './care';
 import { deltaE2000, hexToLab, labToHex, undertoneOf } from './color';
-import { hairColours, pickStyles } from './hair';
+import hairTemplates from '../../fixtures/hair-templates.json';
+import { pickStyles, withHair } from './hair';
+import { OUTFITS, pickOutfits } from './outfits';
 import { lipTints } from './lip';
 import { paletteFor, readPalette, WARDROBE } from './palette';
 import { findSkinType, parseFaceShape, parseSkinAnalysis, parseSkinTone } from './scan';
@@ -40,15 +42,15 @@ describe('colour', () => {
 describe('lip tints', () => {
   it('keep her own lip depth for every skin tone in the cast', () => {
     for (const m of CAST) {
-      const lipL = hexToLab(m.placeholder.tone.lip!).L;
-      const tints = lipTints(m.placeholder.tone.lip);
+      const lipL = hexToLab(m.portrait.tone.lip!).L;
+      const tints = lipTints(m.portrait.tone.lip);
       expect(tints.map((t) => t.name)).toEqual(['Pink', 'Rose', 'Red']);
       for (const t of tints) expect(Math.abs(hexToLab(t.hex).L - lipL)).toBeLessThan(1.5);
     }
   });
 
   it('stays close to her natural lips (a touch, not a new colour)', () => {
-    for (const m of CAST) for (const t of lipTints(m.placeholder.tone.lip)) expect(deltaE2000(hexToLab(t.hex), hexToLab(m.placeholder.tone.lip!))).toBeLessThan(16);
+    for (const m of CAST) for (const t of lipTints(m.portrait.tone.lip)) expect(deltaE2000(hexToLab(t.hex), hexToLab(m.portrait.tone.lip!))).toBeLessThan(16);
   });
 
   it('runs rose, pink and red in hue order', () => {
@@ -64,13 +66,13 @@ describe('lip tints', () => {
 
 describe('palette', () => {
   it('reads contrast from skin against hair', () => {
-    expect(readPalette(CAST[3].placeholder).contrast).toBe('high'); // fair skin, black hair
-    expect(readPalette(CAST[2].placeholder).contrast).toBe('medium');
+    expect(readPalette(withHair(CAST[3].portrait, CAST[3].hair)).contrast).toBe('high'); // fair skin, black hair
+    expect(readPalette(withHair(CAST[2].portrait, CAST[2].hair)).contrast).toBe('medium');
   });
 
   it('gives six varied colours with a reason each, for everyone in the cast', () => {
     for (const m of CAST) {
-      const picks = paletteFor(m.placeholder);
+      const picks = paletteFor(withHair(m.portrait, m.hair));
       expect(picks).toHaveLength(6);
       for (const p of picks) expect(p.why.length).toBeGreaterThan(10);
       for (let i = 0; i < picks.length; i++) for (let j = i + 1; j < picks.length; j++) expect(deltaE2000(hexToLab(picks[i].hex), hexToLab(picks[j].hex))).toBeGreaterThan(15);
@@ -79,16 +81,51 @@ describe('palette', () => {
 
   it('only picks from the wardrobe', () => {
     const names = new Set(WARDROBE.map((w) => w.name));
-    for (const p of paletteFor(CAST[0].placeholder)) expect(names.has(p.name)).toBe(true);
+    for (const p of paletteFor(withHair(CAST[0].portrait, CAST[0].hair))) expect(names.has(p.name)).toBe(true);
   });
 });
 
 describe('skin story', () => {
-  it('leads with strengths and offers care only below 60', () => {
-    const s = skinStory(CAST[0].placeholder);
-    expect(s.strengths.map((x) => x.concern)).toEqual(['wrinkle', 'firmness', 'redness']);
-    expect(s.care.map((x) => x.concern)).toEqual(['dark_circle_v2', 'radiance']);
-    for (const c of s.care) expect(c.nutrients.length).toBeGreaterThan(0);
+  it('leads with strengths, then her lowest areas with nutrients', () => {
+    for (const m of CAST) {
+      const s = skinStory(m.portrait);
+      expect(s.strengths).toHaveLength(3);
+      expect(s.care.length).toBeGreaterThanOrEqual(2);
+      const top = Math.min(...s.strengths.map((x) => x.score));
+      for (const c of s.care) {
+        expect(c.score).toBeLessThanOrEqual(top);
+        expect(c.nutrients.length).toBeGreaterThan(0);
+      }
+    }
+  });
+
+  it('puts her own hair and skin concerns first, and keeps them out of strengths', () => {
+    const life: Lifestyle = { hair: ['hair_fall'], skin: ['moisture'], diet: 'vegan', weightKg: 55, waterGlasses: 5, sleepHours: 6 };
+    const s = skinStory(CAST[0].portrait, life);
+    expect(s.care[0].key).toBe('hair:hair_fall');
+    expect(s.care[1]).toMatchObject({ key: 'skin:moisture', why: 'you' });
+    expect(s.strengths.map((x) => x.concern)).not.toContain('moisture');
+    expect(s.care.filter((c) => c.key === 'skin:moisture')).toHaveLength(1);
+    expect(s.notes.join(' ')).toMatch(/5 glasses/);
+    expect(s.notes.join(' ')).toMatch(/6 hours/);
+    expect(s.notes.join(' ')).toMatch(/B12/);
+    const protein = s.care[0].nutrients.find((n) => n.nutrient.id === 'protein')!;
+    expect(protein.amount).toMatch(/about 44 g for you \(55 kg\)/);
+  });
+
+  it('only suggests foods that fit her diet', () => {
+    const protein = NUTRIENTS.protein;
+    expect(foodsFor(protein, 'vegan')).toEqual(['dal', 'soya chunks', 'tofu', 'peanuts']);
+    expect(foodsFor(protein, 'vegetarian')).toContain('paneer');
+    expect(foodsFor(protein, 'vegetarian')).not.toContain('eggs');
+    expect(foodsFor(protein, 'eggetarian')).toContain('eggs');
+    expect(foodsFor(protein, 'eggetarian')).not.toContain('chicken');
+    for (const n of Object.values(NUTRIENTS)) expect(foodsFor(n, 'vegan').length).toBeGreaterThan(0);
+  });
+
+  it('gives a personal protein figure only for a sensible weight', () => {
+    expect(amountFor(NUTRIENTS.protein, { hair: [], skin: [], weightKg: 500 })).toBe(NUTRIENTS.protein.amount);
+    expect(amountFor(NUTRIENTS.vitC, { hair: [], skin: [], weightKg: 60 })).toBe(NUTRIENTS.vitC.amount);
   });
 
   it('every nutrient has a daily amount, foods and a source', () => {
@@ -104,18 +141,36 @@ describe('hair', () => {
   const templates = [
     { id: '1', title: 'Long Layers' },
     { id: '2', title: 'Curtain Bangs Bob' },
-    { id: '3', title: 'Men Buzz Cut' },
+    { id: '3', title: 'Buzz Cut' },
     { id: '4', title: 'Soft Waves' },
   ];
-  it('picks styles that fit the face shape and leaves out menswear', () => {
+  it('picks styles that fit the face shape and skips bold looks', () => {
     expect(pickStyles('Heart', templates, 2).map((t) => t.id)).toEqual(['2', '1']);
-    expect(pickStyles('Round', templates).map((t) => t.id)).not.toContain('3');
+    expect(pickStyles('Round', [...templates, { id: '5', title: 'Pixie Pink' }]).map((t) => t.id)).not.toContain('5');
   });
 
-  it('starts from her own hair colour', () => {
-    const [own, glaze] = hairColours('#2a1d18');
-    expect(own.hex).toBe('#2a1d18');
-    expect(deltaE2000(hexToLab(glaze.hex), hexToLab(own.hex))).toBeLessThan(12);
+  it('suggests three real templates for every face shape in the cast', () => {
+    for (const m of CAST) {
+      const picks = pickStyles(m.portrait.faceShape, hairTemplates);
+      expect(picks).toHaveLength(3);
+      for (const t of picks) expect(hairTemplates.some((x) => x.id === t.id)).toBe(true);
+    }
+  });
+
+});
+
+describe('outfits', () => {
+  it('finds catalogue outfits in her colours for everyone in the cast', () => {
+    for (const m of CAST) {
+      const picks = pickOutfits(paletteFor(withHair(m.portrait, m.hair)));
+      expect(picks.length).toBeGreaterThanOrEqual(3);
+      for (const p of picks) expect(p.distance).toBeLessThan(18);
+      expect(new Set(picks.map((p) => p.outfit.id)).size).toBe(picks.length);
+    }
+  });
+
+  it('keeps real brands, menswear and sports kits out of the catalogue', () => {
+    for (const o of OUTFITS) expect(o.id).not.toMatch(/nicole_miller|masculine|sports/);
   });
 });
 
@@ -132,7 +187,7 @@ describe('try-on requests', () => {
   });
 
   it('sends the garment as a reference', () => {
-    expect(clothesRequest({ fileId: 'F' }, { refUrl: 'g', category: 'upper_body' })).toEqual({ src_file_id: 'F', ref_file_url: 'g', garment_category: 'upper_body' });
+    expect(clothesRequest({ fileId: 'F' }, { thumb: 'g' })).toEqual({ src_file_id: 'F', ref_file_url: 'g', garment_category: 'upper_body' });
   });
 });
 
@@ -141,6 +196,24 @@ describe('parsing YouCam responses', () => {
     const got = parseSkinAnalysis({ data: { results: { output: [{ type: 'oiliness', ui_score: 61, raw_score: 44.8 }, { type: 'skin_type', whole: { type: 'Combination' }, t_zone: { type: 'Oily' } }] } } });
     expect(got.scores.oiliness).toBe(45);
     expect(got.skinType).toEqual({ whole: 'Combination', tZone: 'Oily', uZone: undefined });
+  });
+
+  it('reads skin type sent as one entry per region (live format)', () => {
+    const got = parseSkinAnalysis({ data: { results: { output: [
+      { type: 'skin_type', region: 'whole', skin_type: 'Oily' },
+      { type: 'skin_type', region: 't_zone', skin_type: 'Oily' },
+      { type: 'skin_type', region: 'u_zone', skin_type: 'Normal' },
+    ] } } });
+    expect(got.skinType).toEqual({ whole: 'Oily', tZone: 'Oily', uZone: 'Normal' });
+  });
+
+  it('builds the recorded sample portraits', () => {
+    expect(CAST.map((m) => m.portrait.faceShape)).toEqual(['Diamond', 'Triangle', 'Heart', 'Square', 'Square']);
+    for (const m of CAST) {
+      expect(Object.keys(m.portrait.scores)).toHaveLength(11);
+      expect(m.portrait.skinType.whole).toBeDefined();
+      expect(m.portrait.tone.lip).toMatch(/^#[0-9a-f]{6}$/);
+    }
   });
 
   it('reads the score_info.json shape with HD keys', () => {
