@@ -13,9 +13,24 @@ Built for the YouCam API Skin AI & eCommerce VTO hackathon.
 - **One look, in layers:** outfit, then hairstyle, then lip tint, each applied on the previous result (`/api/look`). Every prefix is cached in KV.
   - **Clothes:** wardrobe colours from undertone, skin-to-hair contrast and her eye and lip colour; outfits from YouCam's own clothes catalogue in those colours (menswear, a real fashion brand, national-team kits, costumes, swimwear and bottoms-only pieces are left out).
   - **Hair:** YouCam hairstyle templates matched to face shape, keeping her own hair colour.
-  - **Lip tint, the only makeup:** her own lip colour at exactly the same depth, with a touch of rose, pink or red. Skin smoothing is set to 0 on every makeup call (the engine's default is 50).
+  - **Lip tint, the only makeup:** her own lip colour at the same depth, with a touch of rose, pink or red. Skin smoothing is set to 0 on every makeup call (the engine's default is 50).
+- **Zoom to compare:** tap any photo for a full-screen view, tap to zoom in, and flip between "As you are" and "Your look" at the same zoom.
 - **Care from within:** About you (diet, weight, water, sleep, activity, sun, her own hair and skin concerns) plus AI Skin Analysis. Strengths first; then nutrients with published daily amounts for adult women, foods filtered by diet, and habits, with sources (NIH Office of Dietary Supplements, National Academies). General information, not a prescription.
 - **Not included:** hair-colour try-on. YouCam's hair-colour call brightened the whole photo, face included.
+
+## Impact
+
+For a shopper, every suggestion starts from her own colours and face shape, and she sees it on her own unretouched photo before buying. For a store, the same flow runs on its catalogue: the lip tint is a shade it can stock, and the outfits are its products, ranked for her.
+
+Measured on 2026-11-01, on YouCam's own sample photos:
+
+- **Lip depth:** with default settings, YouCam's makeup render made lips about 5 L* darker. The calibrated render (`src/domain/lip.ts`) keeps her lip depth within about 2 L* on three lips: medium (L*≈40), deep and saturated (L*≈40) and light (L*≈63).
+- **No retouching:** skin smoothing is 0 instead of the default 50. YouCam's hair-colour try-on brightened cheek and background by 10–13 points (RGB 0–255) as well as the hair, so it's left out.
+- **Fairness:** undertone from hue alone labelled every deep skin tone in the cast "cool"; the depth-adjusted reading doesn't (tested).
+- **Inputs:** YouCam's hair-colour read was wrong or empty on 4 of the 5 sample photos, so the user can correct it.
+- **Cost:** a portrait reading is 44 API units, each look layer 1–2, repeat views 0 (cached).
+
+Not measured: whether this lowers wrong-shade purchases or returns. There's no baseline yet; a store could compare return rates for items bought after a try-on here against those bought without one.
 
 ## YouCam APIs and units
 
