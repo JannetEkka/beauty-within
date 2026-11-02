@@ -151,14 +151,18 @@ Results are cached,
 and the API key stays on the server.
 
 39
-00:01:56,149 --> 00:01:59,634
-For shoppers and stores, that means fewer wrong buys,
+00:01:56,149 --> 00:01:59,284
+In my tests, the lip tint kept each woman's lip
 
 40
-00:01:59,674 --> 00:02:02,549
-and more women seeing themselves as they are.
+00:01:59,324 --> 00:02:01,372
+depth within two lightness points,
 
 41
-00:02:03,162 --> 00:02:06,349
+00:02:01,412 --> 00:02:04,787
+where the default render made lips five points darker.
+
+42
+00:02:05,412 --> 00:02:08,599
 Beauty Within, built with the YouCam API.
 
